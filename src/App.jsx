@@ -1,26 +1,38 @@
-import Footer from "./components/Footer"
-import Navbar from "./components/Project"
-import Header from "./pages/Header"
-import StudentSection from "./pages/StudentSection"
-import Map from "./components/Map"
-
-
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from "./components/Project";
+import Footer from "./components/Footer";
+import ScrollToTopButton from "./components/ScrollToTop";
+import HomePage from "./pages/HomePage";
+import Gallery from "./pages/Gallary";
+import FacilitiesPage from './pages/DetailsPage';
+import HolidayComponent from './components/Holiday';
 
 function App() {
- 
-
   return (
-    <div className=' h-screen'>   
- 
-<Navbar/>
-<Header/>
+    <Router>
+      <div className="h-screen">
+        {/* Navbar */}
+        <Navbar />
 
-<StudentSection/>
-<Map/>
-<Footer/>
-   
-    </div>
-  )
+        {/* Main Content */}
+        <main>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/details" element={<FacilitiesPage/>} />
+            <Route path="/holiday" element ={<HolidayComponent/>}/>
+
+
+          </Routes>
+        </main>
+
+        {/* Footer and Scroll to Top */}
+        <Footer />
+        <ScrollToTopButton />
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;

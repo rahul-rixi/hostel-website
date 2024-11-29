@@ -1,79 +1,104 @@
-import React, { useState, useEffect } from 'react';
-import spider from '../assets/spiderMon.jpg';
-import Tree from '../assets/Tree.jpg';
+import React, { useState, useEffect, useRef } from 'react';
+import { NavLink } from 'react-router-dom'; // Import NavLink
 import first1 from '../assets/first1.jpg';
 import second from '../assets/second.jpg';
 import third from '../assets/third.jpg';
+import lakeImage from '../assets/lake.jpg';
+import lake2 from '../assets/lake2.jpg';
+import { gsap } from 'gsap';
 
 const Header = () => {
-  const images = [spider, third, first1, second, Tree];
+  const images = [first1, second, third, lakeImage, lake2];
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [textAnimated, setTextAnimated] = useState(false);
+  const imageRef = useRef([]);
+  const textRef = useRef([]);
+  const dotRef = useRef([]);
 
-  // Automatically change image every 4 seconds
   useEffect(() => {
+    if (!textAnimated) {
+      gsap.utils.toArray(textRef.current).forEach((el, index) => {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 1, delay: index * 0.3, ease: 'power3.out' }
+        );
+      });
+      setTextAnimated(true);
+    }
+
+    gsap.fromTo(
+      imageRef.current[currentIndex],
+      { x: 100, opacity: 0 },
+      { x: 0, opacity: 1, duration: 1.5, ease: 'power3.out' }
+    );
+
+    gsap.fromTo(
+      imageRef.current[(currentIndex - 1 + images.length) % images.length],
+      { x: 0, opacity: 1 },
+      { x: -100, opacity: 0, duration: 1.5, ease: 'power3.out' }
+    );
+
+    gsap.to(dotRef.current[currentIndex], {
+      scale: 1.5, duration: 0.5, ease: 'power3.out',
+    });
+
+    gsap.to(dotRef.current[(currentIndex - 1 + images.length) % images.length], {
+      scale: 1, duration: 0.5, ease: 'power3.out',
+    });
+
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 4000);
 
-    return () => clearInterval(interval); // Cleanup interval on unmount
-  }, []);
+    return () => clearInterval(interval);
+  }, [currentIndex, textAnimated]);
 
-  // Function to handle dot click
   const handleDotClick = (index) => {
     setCurrentIndex(index);
   };
 
   return (
     <div className="relative">
-
-      {/* Image slider */}
-      <div className="h-[80vh] w-full relative overflow-hidden">
-        <div className="absolute inset-0 transition-opacity duration-1000 ease-in-out">
+      <div className="h-[100vh] w-full relative overflow-hidden">
+        {images.map((image, index) => (
           <img
-            className="w-full h-full object-cover opacity-0 transition-opacity duration-1000 ease-in-out"
-            src={images[currentIndex]}
-            alt="Slider Image"
-            style={{ opacity: 1 }}
+            ref={(el) => (imageRef.current[index] = el)}
+            key={index}
+            className="w-full h-full object-cover absolute transition-transform ease-in-out"
+            style={{ opacity: currentIndex === index ? 1 : 0 }}
+            src={image}
+            alt="Slider"
           />
-        </div>
-        <div
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out`}
-          style={{ opacity: 1 }}
-        >
-          <img
-            className="w-full h-full object-cover"
-            src={images[currentIndex]}
-            alt="Slider Image Mobile"
-            style={{ opacity: 1 }}
-          />
-        </div>
+        ))}
       </div>
 
-      {/* Overlay Text */}
-      <div className="absolute top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center px-4">
-        <h1 className="text-4xl font-extrabold text-transparent bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 bg-clip-text drop-shadow-2xl font-sans md:text-6xl">
+      <div className="absolute inset-0 flex flex-col justify-center items-center text-center bg-black bg-opacity-30">
+        <h1 ref={(el) => (textRef.current[0] = el)} className="text-4xl md:text-5xl font-bold text-white uppercase drop-shadow-md">
           Welcome to Boy's Hostel
         </h1>
-        <h2 className="max-w-md mx-auto mt-4 text-sm md:text-lg text-gray-300 italic">
+        <p ref={(el) => (textRef.current[1] = el)} className="mt-4 text-sm md:text-lg text-gray-300 italic max-w-2xl">
           "A hostel isn't just a building; it's a second home filled with stories, friendships, and dreams."
-        </h2>
-        <button className="px-4 py-2 md:px-6 md:py-3 mt-6 md:mt-8 bg-gradient-to-r from-indigo-700 to-purple-600 text-white font-semibold rounded-full hover:bg-gradient-to-r hover:from-slate-300 hover:to-white hover:text-indigo-700 shadow-lg transform hover:scale-105 transition-all duration-300">
-          Explore More
-        </button>
+        </p>
+        <NavLink to="/gallery">
+  <button className="px-6 py-3 mt-6 bg-white bg-opacity-10 text-white font-medium rounded-lg border-2 border-white opacity-80 backdrop-blur-md hover:opacity-90 hover:bg-opacity-20 hover:backdrop-blur-lg transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+    See Inside
+  </button>
+</NavLink>
+
+
+
+
       </div>
 
-      {/* Dots with transition effect */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3">
         {images.map((_, index) => (
           <div
             key={index}
+            ref={(el) => (dotRef.current[index] = el)}
             onClick={() => handleDotClick(index)}
-            className={`w-4 h-4 rounded-full cursor-pointer transition-transform duration-300 transform ${
-              currentIndex === index ? 'bg-white scale-125' : 'bg-gray-400 scale-100'
-            }`}
-            style={{
-              transition: 'background-color 0.3s ease, transform 0.3s ease',
-            }}
+            className={`w-4 h-4 rounded-full cursor-pointer bg-gray-400 transition-all duration-300`}
+            style={{ backgroundColor: currentIndex === index ? 'white' : 'gray' }}
           ></div>
         ))}
       </div>
