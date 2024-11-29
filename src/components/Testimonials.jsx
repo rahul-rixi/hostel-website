@@ -11,7 +11,7 @@ import bg2 from '../assets/bg2.jpg'; // Import bg2 for the profile background
 
 const students = [
   {
-    name: "Rahul",
+    name: "chahul",
     image: first1,
     testimonial: "Living here has been an amazing experience. The staff and students are so friendly.",
   },
