@@ -4,8 +4,8 @@ import { gsap } from 'gsap'; // Import GSAP
 import first1 from '../assets/first1.jpg';
 import second from '../assets/second.jpg';
 import third from '../assets/third.jpg';
-import lakeImage from '../assets/lake.jpg';
-import lake2 from '../assets/lake2.jpg';
+import lakeImage from '../assets/Lake.jpg';
+import lake2 from '../assets/Lake2.jpg';
 import FacilitiesPage from './DetailsPage';
 
 const Gallery = () => {

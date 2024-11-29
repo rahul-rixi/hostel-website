@@ -4,8 +4,8 @@ import { gsap } from 'gsap'; // Import GSAP
 import first1 from '../assets/first1.jpg';
 import second from '../assets/second.jpg';
 import third from '../assets/third.jpg';
-import lakeImage from '../assets/lake.jpg';
-import lake2 from '../assets/lake2.jpg';
+import lakeImage from '../assets/Lake.jpg';
+import lake2 from '../assets/Lake2.jpg';
 import bg1 from '../assets/bg1.jpg';
 import bg2 from '../assets/bg2.jpg'; // Import bg2 for the profile background
 
@@ -51,15 +51,15 @@ const TestimonialCarousel = () => {
   useEffect(() => {
     // GSAP animation for the sliding effect from right to left
     gsap.fromTo(
-      '.testimonial-slide', 
+      '.testimonial-slide',
       { opacity: 0, x: 100 }, // Start from the right (100% position)
       { opacity: 1, x: 0, duration: 1, ease: 'easeOut' }
     );
 
     // Animate previous slide out to the left
     gsap.fromTo(
-      '.previous-slide', 
-      { opacity: 1, x: 0 }, 
+      '.previous-slide',
+      { opacity: 1, x: 0 },
       { opacity: 0, x: -100, duration: 1, ease: 'easeIn' }
     );
   }, [currentSlide]);
@@ -121,9 +121,14 @@ const TestimonialCarousel = () => {
           {students.map((_, index) => (
             <motion.div
               key={index}
-              className={`w-4 h-4 rounded-full cursor-pointer transition-all duration-300 ${currentSlide === index ? 'bg-indigo-600' : 'bg-gray-300'}`}
+              className={`w-4 h-4 cursor-pointer transition-all duration-300 ${currentSlide === index ? 'bg-indigo-600' : 'bg-gray-300'}`}
               onClick={() => setCurrentSlide(index)}
               whileHover={{ scale: 1.2 }}
+              style={{
+                width: currentSlide === index ? '30px' : '10px', // Active dot stretches horizontally
+                height: '10px', // Ensures inactive dots remain circular
+                borderRadius: currentSlide === index ? '12px' : '50%', // Active dot is rounded rectangle
+              }}
             />
           ))}
         </div>

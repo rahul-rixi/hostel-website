@@ -14,7 +14,7 @@ const HomePage = () => {
     <Header/>
     <AboutUs/>
     <PrincipalMessage/>
-    <Facilities/>
+   <Facilities/>
     <TestimonialCarousel/>
 
   
