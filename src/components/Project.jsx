@@ -25,14 +25,20 @@ const Navbar = () => {
                   to={link === 'Home' ? '/' : `/${link.toLowerCase()}`}
                   className="block px-4 py-3 text-[#333333] font-semibold hover:text-indigo-600 transition-all duration-300"
                   style={({ isActive }) => ({
-                    textDecoration: isActive ? 'underline' : 'none',
                     color: isActive ? '#4C51BF' : '#333333',
                   })}
                 >
                   <span className="select-none">{link}</span>
                 </NavLink>
+
+                {/* Hover Underline */}
                 <div
-                  className="absolute left-0 bottom-0 w-full h-1 bg-indigo-600 scale-x-0 group-hover:scale-x-100 transition-all duration-300 ease-in-out"
+                  className="absolute left-0 bottom-0 w-full h-1 bg-indigo-600 scale-x-0 group-hover:scale-x-100 transition-all duration-300 ease-in-out z-10"
+                ></div>
+
+                {/* Active Link Underline */}
+                <div
+                  className="absolute left-0 bottom-0 w-full h-1 bg-indigo-600 scale-x-0 group-active:scale-x-100 transition-all duration-300 ease-in-out z-20"
                 ></div>
               </div>
             ))}
@@ -68,12 +74,18 @@ const Navbar = () => {
                 to={link === 'Home' ? '/' : `/${link.toLowerCase()}`}
                 className="block px-4 py-3 bg-transparent rounded-lg hover:bg-opacity-20 transition-all duration-300"
                 style={({ isActive }) => ({
-                  textDecoration: isActive ? 'underline' : 'none',
                   color: isActive ? '#4C51BF' : '#333333',
                 })}
               >
                 <span className="select-none">{link}</span>
-                <div className="absolute left-0 bottom-0 w-full h-1 bg-indigo-600 scale-x-0 group-hover:scale-x-100 transition-all duration-300 ease-in-out"></div>
+
+                {/* Hover Underline */}
+                <div className="absolute left-0 bottom-0 w-full h-1 bg-indigo-600 scale-x-0 group-hover:scale-x-100 transition-all duration-300 ease-in-out z-10"></div>
+
+                {/* Active Link Underline */}
+                <div
+                  className="absolute left-0 bottom-0 w-full h-1 bg-indigo-600 scale-x-0 group-active:scale-x-100 transition-all duration-300 ease-in-out z-20"
+                ></div>
               </NavLink>
             </li>
           ))}
