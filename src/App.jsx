@@ -12,7 +12,7 @@ import ContactPage from './pages/ContactPage';
 function App() {
   return (
     <Router>
-      <div className="h-screen">
+      <div className="h-screen ">
         {/* Navbar */}
         <Navbar />
 

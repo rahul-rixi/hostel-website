@@ -1,144 +1,75 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { gsap } from 'gsap';
-import first1 from '../assets/first1.jpg';
-import second from '../assets/second.jpg';
-import third from '../assets/third.jpg';
-import lakeImage from '../assets/Lake.jpg';
-import lake2 from '../assets/Lake2.jpg';
-import bg2 from '../assets/bg2.jpg';
+import dp from '../assets/dp.jpeg'; // Import the image
 
-const students = [
-  {
-    name: "Rahul",
-    image: first1,
-    testimonial: "Living here has been an amazing experience. The staff and students are so friendly.",
-  },
-  {
-    name: "Anish",
-    image: second,
-    testimonial: "I love the sports activities and the fun community spirit here.",
-  },
-  {
-    name: "Amarjeet",
-    image: third,
-    testimonial: "The hostel provides excellent facilities and a peaceful environment.",
-  },
-  {
-    name: "Amit",
-    image: lakeImage,
-    testimonial: "The food, rooms, and amenities are top-notch. I highly recommend it!",
-  },
-  {
-    name: "Asish",
-    image: lake2,
-    testimonial: "The events and festivals make every day feel special at the hostel.",
-  },
+const testimonials = [
+  { name: 'Rahul Kumar', title: 'B.Tech 3rd Semester', text: 'The hostel provides a peaceful and well-maintained environment. The staff is supportive, and the facilities are great for studying and relaxing.', image: dp },
+  { name: 'Anish Raj', title: 'B.Tech 3rd Semester', text: 'I really enjoy staying here. The rooms are spacious, and the food quality is always fresh and delicious. The hostel has a homely atmosphere.', image: dp },
+  { name: 'Amarjeet Singh', title: 'B.Tech 3rd Semester', text: 'The best part about the hostel is the fast Wi-Fi and the common areas where we can interact and study together. I feel comfortable and safe here.', image: dp },
+  { name: 'Ashish Kumar', title: 'B.Tech 3rd Semester', text: 'I am very happy with the cleanliness of the hostel. The staff is always ready to help, and the food is nutritious. It’s a great place for students.', image: dp },
+  { name: 'Amit Sharma', title: 'B.Tech 3rd Semester', text: 'Living here has been a great experience. The hostel provides all the necessary facilities, and the atmosphere is perfect for focusing on studies.', image: dp },
 ];
 
-const TestimonialCarousel = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+const Testimonial = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % students.length);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
     }, 3000);
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    gsap.fromTo(
-      '.testimonial-slide',
-      { opacity: 0, x: 100 },
-      { opacity: 1, x: 0, duration: 1, ease: 'easeOut' }
-    );
-    gsap.fromTo(
-      '.previous-slide',
-      { opacity: 1, x: 0 },
-      { opacity: 0, x: -100, duration: 1, ease: 'easeIn' }
-    );
-  }, [currentSlide]);
+  const getVisibleTestimonials = () => {
+    return [
+      testimonials[(currentIndex - 1 + testimonials.length) % testimonials.length],
+      testimonials[currentIndex],
+      testimonials[(currentIndex + 1) % testimonials.length],
+    ];
+  };
 
   return (
-    <section
-      className="w-full bg-gray-100 py-16"
-      style={{ userSelect: 'none' }} // Prevent text selection for the entire section
-    >
-      <div className="max-w-6xl mx-auto px-4 text-center">
-        <motion.h2
-          className="text-4xl font-bold text-black mb-8 md:text-5xl"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          What Our Students Say
-        </motion.h2>
+    <div className="bg-gray-100 py-12 px-6 md:px-20 min-h-screen flex flex-col items-center">
+      <h2 className="text-center text-4xl font-semibold text-gray-800 mb-10">What Our Hostel Residents Say</h2>
 
-        {/* Testimonial Carousel */}
-        <div className="relative">
-          {/* Previous Slide */}
-          <motion.div
-            className="testimonial-slide previous-slide w-full h-64 rounded-lg overflow-hidden shadow-lg bg-cover bg-center absolute inset-0"
-            style={{
-              backgroundImage: `url(${students[(currentSlide - 1 + students.length) % students.length].image})`,
-              userSelect: 'none',
-            }}
-            key={currentSlide - 1}
-          ></motion.div>
-
-          {/* Current Slide */}
-          <motion.div
-            className="testimonial-slide w-full h-64 rounded-lg overflow-hidden shadow-lg bg-cover bg-center"
-            style={{
-              backgroundImage: `url(${students[currentSlide].image})`,
-              userSelect: 'none',
-            }}
-            key={currentSlide}
-          >
+      <div className="relative flex justify-center items-center space-x-6 max-w-full overflow-hidden">
+        {/* Render testimonials with proper scaling for mobile */}
+        {getVisibleTestimonials().map((testimonial, index) => {
+          const isCenter = index === 1;
+          return (
             <div
-              className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white font-semibold p-6"
-              style={{
-                backgroundImage: `url(${bg2})`,
-                userSelect: 'none',
-              }}
-            >
-              <div
-                className="w-24 h-24 rounded-full border-4 border-white mb-4 overflow-hidden"
-                style={{ pointerEvents: 'none' }}
-              >
-                <img
-                  src={students[currentSlide].image}
-                  alt={students[currentSlide].name}
-                  className="w-full h-full object-cover"
-                  style={{ pointerEvents: 'none', userSelect: 'none' }}
-                />
-              </div>
-              <p className="text-xl font-bold">{students[currentSlide].name}</p>
-              <p className="text-lg italic mt-2">{students[currentSlide].testimonial}</p>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Dots for Navigation */}
-        <div className="flex justify-center mt-6 space-x-4">
-          {students.map((_, index) => (
-            <motion.div
               key={index}
-              className={`w-4 h-4 cursor-pointer transition-all duration-300 ${currentSlide === index ? 'bg-indigo-600' : 'bg-gray-300'}`}
-              onClick={() => setCurrentSlide(index)}
-              whileHover={{ scale: 1.2 }}
-              style={{
-                width: currentSlide === index ? '30px' : '10px',
-                height: '10px',
-                borderRadius: currentSlide === index ? '12px' : '50%',
-                userSelect: 'none',
-              }}
-            />
-          ))}
-        </div>
+              className={`transition-transform duration-700 ease-in-out transform ${
+                isCenter
+                  ? 'scale-110 z-10 opacity-100'
+                  : 'scale-90 opacity-80 hidden md:flex flex-wrap'
+              }`}
+            >
+              <div className="bg-white p-6 rounded-lg shadow-lg text-center w-80 mx-auto">
+                <img
+                  src={testimonial.image}
+                  alt={`Image of ${testimonial.name}`}
+                  className="w-24 h-24 mx-auto rounded-full mb-4 border-4 border-gray-300"
+                />
+                <h3 className="text-lg font-semibold text-gray-700">{testimonial.name}</h3>
+                <p className="text-sm text-gray-500 mb-4">{testimonial.title}</p>
+                <p className="text-gray-600">{testimonial.text}</p>
+              </div>
+            </div>
+          );
+        })}
       </div>
-    </section>
+
+      <div className="flex justify-center mt-8 space-x-2">
+        {testimonials.map((_, index) => (
+          <button
+            key={index}
+            className={`transition-all h-3 ${index === currentIndex ? 'w-6 bg-gray-800 rounded-md' : 'w-3 bg-gray-400 rounded-full'}`}
+            onClick={() => setCurrentIndex(index)}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
 
-export default TestimonialCarousel;
+export default Testimonial;
