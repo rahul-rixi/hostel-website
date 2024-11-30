@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { gsap } from 'gsap'; // Import GSAP
+import { gsap } from 'gsap';
 import first1 from '../assets/first1.jpg';
 import second from '../assets/second.jpg';
 import third from '../assets/third.jpg';
 import lakeImage from '../assets/Lake.jpg';
 import lake2 from '../assets/Lake2.jpg';
-import bg1 from '../assets/bg1.jpg';
-import bg2 from '../assets/bg2.jpg'; // Import bg2 for the profile background
+import bg2 from '../assets/bg2.jpg';
 
 const students = [
   {
-    name: "chahul",
+    name: "Rahul",
     image: first1,
     testimonial: "Living here has been an amazing experience. The staff and students are so friendly.",
   },
@@ -40,23 +39,19 @@ const students = [
 const TestimonialCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Change slide every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide(prevSlide => (prevSlide + 1) % students.length);
-    }, 3000); // 3 seconds interval
-    return () => clearInterval(interval); // Clean up interval on component unmount
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % students.length);
+    }, 3000);
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
-    // GSAP animation for the sliding effect from right to left
     gsap.fromTo(
       '.testimonial-slide',
-      { opacity: 0, x: 100 }, // Start from the right (100% position)
+      { opacity: 0, x: 100 },
       { opacity: 1, x: 0, duration: 1, ease: 'easeOut' }
     );
-
-    // Animate previous slide out to the left
     gsap.fromTo(
       '.previous-slide',
       { opacity: 1, x: 0 },
@@ -65,7 +60,10 @@ const TestimonialCarousel = () => {
   }, [currentSlide]);
 
   return (
-    <section className="w-full bg-gray-100 py-16">
+    <section
+      className="w-full bg-gray-100 py-16"
+      style={{ userSelect: 'none' }} // Prevent text selection for the entire section
+    >
       <div className="max-w-6xl mx-auto px-4 text-center">
         <motion.h2
           className="text-4xl font-bold text-black mb-8 md:text-5xl"
@@ -78,36 +76,41 @@ const TestimonialCarousel = () => {
 
         {/* Testimonial Carousel */}
         <div className="relative">
-          {/* Previous Slide (will be animated out to the left) */}
+          {/* Previous Slide */}
           <motion.div
             className="testimonial-slide previous-slide w-full h-64 rounded-lg overflow-hidden shadow-lg bg-cover bg-center absolute inset-0"
-            style={{ backgroundImage: `url(${students[(currentSlide - 1 + students.length) % students.length].image})` }}
+            style={{
+              backgroundImage: `url(${students[(currentSlide - 1 + students.length) % students.length].image})`,
+              userSelect: 'none',
+            }}
             key={currentSlide - 1}
-            initial={{ x: 0 }}
-            animate={{ x: -100 }}
-            transition={{ duration: 1 }}
-            opacity={0}
           ></motion.div>
 
-          {/* Current Slide (will slide in from the right) */}
+          {/* Current Slide */}
           <motion.div
             className="testimonial-slide w-full h-64 rounded-lg overflow-hidden shadow-lg bg-cover bg-center"
-            style={{ backgroundImage: `url(${students[currentSlide].image})` }}
+            style={{
+              backgroundImage: `url(${students[currentSlide].image})`,
+              userSelect: 'none',
+            }}
             key={currentSlide}
-            initial={{ x: 100 }}
-            animate={{ x: 0 }}
-            transition={{ duration: 1 }}
           >
             <div
               className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white font-semibold p-6"
-              style={{ backgroundImage: `url(${bg2})` }} // Applying bg2 for the profile background
+              style={{
+                backgroundImage: `url(${bg2})`,
+                userSelect: 'none',
+              }}
             >
-              {/* The image is kept static by making it a background */}
-              <div className="w-24 h-24 rounded-full border-4 border-white mb-4 overflow-hidden">
+              <div
+                className="w-24 h-24 rounded-full border-4 border-white mb-4 overflow-hidden"
+                style={{ pointerEvents: 'none' }}
+              >
                 <img
                   src={students[currentSlide].image}
                   alt={students[currentSlide].name}
                   className="w-full h-full object-cover"
+                  style={{ pointerEvents: 'none', userSelect: 'none' }}
                 />
               </div>
               <p className="text-xl font-bold">{students[currentSlide].name}</p>
@@ -125,9 +128,10 @@ const TestimonialCarousel = () => {
               onClick={() => setCurrentSlide(index)}
               whileHover={{ scale: 1.2 }}
               style={{
-                width: currentSlide === index ? '30px' : '10px', // Active dot stretches horizontally
-                height: '10px', // Ensures inactive dots remain circular
-                borderRadius: currentSlide === index ? '12px' : '50%', // Active dot is rounded rectangle
+                width: currentSlide === index ? '30px' : '10px',
+                height: '10px',
+                borderRadius: currentSlide === index ? '12px' : '50%',
+                userSelect: 'none',
               }}
             />
           ))}

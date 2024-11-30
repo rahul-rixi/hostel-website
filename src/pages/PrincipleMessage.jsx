@@ -47,7 +47,11 @@ const PrincipalMessage = () => {
   }, []);
 
   return (
-    <div id="principal-message" className="min-h-screen bg-gray-100 text-gray-800 py-12 px-6 md:px-20">
+    <div
+      id="principal-message"
+      className="min-h-screen bg-gray-100 text-gray-800 py-12 px-6 md:px-20"
+      style={{ userSelect: 'none' }} // Prevent text selection
+    >
       {/* Section Header */}
       <div className="text-center mb-10">
         <h2 className="text-4xl font-bold text-gray-800 md:text-5xl">
@@ -62,6 +66,7 @@ const PrincipalMessage = () => {
           <div
             ref={imageRef}
             className="w-56 md:w-72 lg:w-96 h-56 md:h-72 lg:h-96 rounded-full overflow-hidden shadow-xl border-4 border-gray-300 transform transition-all duration-300"
+            style={{ pointerEvents: 'none', userSelect: 'none' }} // Make image unselectable
           >
             <img
               src={principalImage}
@@ -73,7 +78,7 @@ const PrincipalMessage = () => {
 
         {/* Text Section */}
         <div className="bg-white p-6 md:p-8 rounded-lg shadow-md border">
-          {[ 
+          {[
             `"Education is the passport to the future, for tomorrow belongs to those who prepare for it today."`,
             'Dear Students,',
             'Welcome to our hostel. We believe the environment where you reside plays a significant role in shaping your personality and aiding academic success. Our hostel is a nurturing ground for aspirations, discipline, and growth.',

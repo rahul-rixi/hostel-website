@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import Checkbox from './Checkbox'; // Import Checkbox component
-
+import Checkbox from './Checkbox'; 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -19,7 +18,7 @@ const Navbar = () => {
           </NavLink>
 
           <div className="hidden md:flex space-x-8 font-medium">
-            {['Home', 'Details', 'Gallery', 'Contact', 'FAQ'].map((link) => (
+            {['Home', 'Facilities', 'Gallery', 'Contact', 'FAQ'].map((link) => (
               <div key={link} className="relative group">
                 <NavLink
                   to={link === 'Home' ? '/' : `/${link.toLowerCase()}`}
