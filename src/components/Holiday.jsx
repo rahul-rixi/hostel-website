@@ -35,24 +35,24 @@ const holidays = [
 
 const HolidayComponent = () => {
   return (
-    <div className="bg-gray-100 p-8 rounded-lg shadow-lg max-w-4xl mx-auto overflow-x-auto">
-      <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">Holiday List</h1>
+    <div className="bg-white p-8 rounded-lg shadow-lg w-full mx-auto overflow-x-auto ">
+      <h1 className="text-3xl mt-16 font-bold text-center mb-6 text-gray-800">Holiday List</h1>
       <table className="min-w-full table-auto bg-white shadow-md rounded-lg overflow-hidden">
         <thead className="bg-indigo-600 text-white">
           <tr>
-            <th className="py-3 px-6 text-left">Vacation Name</th>
-            <th className="py-3 px-6 text-left">Date</th>
-            <th className="py-3 px-6 text-left">Day</th>
-            <th className="py-3 px-6 text-left">Total Holidays</th>
+            <th className="py-4 px-6 text-left">Vacation Name</th>
+            <th className="py-4 px-6 text-left">Date</th>
+            <th className="py-4 px-6 text-left">Day</th>
+            <th className="py-4 px-6 text-left">Total Holidays</th>
           </tr>
         </thead>
         <tbody>
           {holidays.map((holiday, index) => (
-            <tr key={index} className="border-t hover:bg-gray-50">
-              <td className="py-3 px-6 text-gray-800">{holiday.name}</td>
-              <td className="py-3 px-6 text-gray-600">{holiday.date}</td>
-              <td className="py-3 px-6 text-gray-600">{holiday.day}</td>
-              <td className="py-3 px-6 text-gray-600">{holiday.totalDays}</td>
+            <tr key={index} className="border-t hover:bg-indigo-50  transition duration-300 ease-in-out transform hover:scale-105">
+              <td className="py-4 px-6 text-gray-800">{holiday.name}</td>
+              <td className="py-4 px-6 text-gray-600">{holiday.date}</td>
+              <td className="py-4 px-6 text-gray-600">{holiday.day}</td>
+              <td className="py-4 px-6 text-gray-600">{holiday.totalDays}</td>
             </tr>
           ))}
         </tbody>

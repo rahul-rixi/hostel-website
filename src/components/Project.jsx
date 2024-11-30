@@ -1,16 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-import Checkbox from './Checkbox'; 
+import Checkbox from './Checkbox';
+
 const Navbar = () => {
+  const [navbarVisible, setNavbarVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const lastScrollTop = useRef(0);  // Track scroll position
+  const scrollTimeout = useRef(null); // Store timeout ID
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+
+  const handleScroll = () => {
+    const currentScrollTop = window.pageYOffset;
+
+    // Hide navbar on scroll down
+    if (currentScrollTop > lastScrollTop.current) {
+      if (navbarVisible) {
+        setNavbarVisible(false);
+      }
+    } else if (currentScrollTop < lastScrollTop.current) {
+      // Show navbar on scroll up
+      if (!navbarVisible) {
+        setNavbarVisible(true);
+      }
+    }
+
+    lastScrollTop.current = currentScrollTop <= 0 ? 0 : currentScrollTop; // For mobile or negative scrolling
+
+    // Clear the existing timeout and set a new one with 500ms delay
+    if (scrollTimeout.current) {
+      clearTimeout(scrollTimeout.current);
+    }
+
+    // Re-show navbar after 500ms if scrolling stops
+    scrollTimeout.current = setTimeout(() => {
+      if (currentScrollTop === window.pageYOffset) {
+        setNavbarVisible(true);
+      }
+    }, 500);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup on unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+    };
+  }, [navbarVisible]);
 
   return (
     <>
       <div className="max-w-[90%] mx-auto">
         <nav
-          className={`h-16 w-full flex justify-between items-center px-8 backdrop-blur-md shadow-lg z-50 fixed top-0 left-0 right-0 transition-all duration-300 ease-in-out`}
+          className={`h-16 w-full flex justify-between items-center px-8 backdrop-blur-md shadow-lg z-50 fixed top-0 left-0 right-0 transition-all duration-300 ease-in-out ${navbarVisible ? 'translate-y-0' : '-translate-y-full'}`}
         >
           <NavLink to="/" className="text-3xl text-white font-bold tracking-wider flex items-center">
             <span className="text-indigo-600">Hostel</span>
@@ -35,9 +81,9 @@ const Navbar = () => {
                   className="absolute left-0 bottom-0 w-full h-1 bg-indigo-600 scale-x-0 group-hover:scale-x-100 transition-all duration-300 ease-in-out z-10"
                 ></div>
 
-                {/* Active Link Underline */}
+                {/* Active Link Underline - Reduced length and black color */}
                 <div
-                  className="absolute left-0 bottom-0 w-full h-1 bg-indigo-600 scale-x-0 group-active:scale-x-100 transition-all duration-300 ease-in-out z-20"
+                  className="absolute left-0 bottom-0 w-[60%] h-1 bg-black scale-x-0 group-active:scale-x-100 transition-all duration-300 ease-in-out z-20"
                 ></div>
               </div>
             ))}
@@ -81,9 +127,9 @@ const Navbar = () => {
                 {/* Hover Underline */}
                 <div className="absolute left-0 bottom-0 w-full h-1 bg-indigo-600 scale-x-0 group-hover:scale-x-100 transition-all duration-300 ease-in-out z-10"></div>
 
-                {/* Active Link Underline */}
+                {/* Active Link Underline - Reduced length and black color */}
                 <div
-                  className="absolute left-0 bottom-0 w-full h-1 bg-indigo-600 scale-x-0 group-active:scale-x-100 transition-all duration-300 ease-in-out z-20"
+                  className="absolute left-0 bottom-0 w-[60%] h-1 bg-black scale-x-0 group-active:scale-x-100 transition-all duration-300 ease-in-out z-20"
                 ></div>
               </NavLink>
             </li>
