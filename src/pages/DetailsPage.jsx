@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CountUp from 'react-countup';
@@ -9,19 +9,71 @@ import facilityImage2 from '../assets/second.jpg';
 import facilityImage3 from '../assets/third.jpg';
 
 const Facilities = () => {
-  const facilityRefs = useRef([]);
 
-  const addToRefs = (el) => {
-    if (el && !facilityRefs.current.includes(el)) {
-      facilityRefs.current.push(el);
-    }
-  };
+  // Static facilities data (useMemo for optimization)
+  const facilitiesData = useMemo(() => [
+    {
+      number: 570,
+      title: "Total Students",
+      description: "A vibrant community of 570 students fostering diversity and inclusion.",
+      image: facilityImage1,
+    },
+    {
+      number: 160,
+      title: "Rooms",
+      description: "160 spacious and well-furnished rooms with modern amenities.",
+      image: facilityImage2,
+    },
+    {
+      number: 30,
+      title: "Staff Members",
+      description: "A dedicated team of 30 staff ensures smooth operations.",
+      image: facilityImage3,
+    },
+    {
+      number: 7,
+      title: "TV Rooms",
+      description: "7 common TV rooms to relax and enjoy with friends.",
+      image: facilityImage1,
+    },
+    {
+      number: 14,
+      title: "Water Filters",
+      description: "14 water filters ensuring safe drinking water.",
+      image: facilityImage2,
+    },
+    {
+      number: 7,
+      title: "Washing Machines",
+      description: "7 washing machines for convenient laundry.",
+      image: facilityImage3,
+    },
+    {
+      number: 1,
+      title: "Gym",
+      description: "A well-equipped gym for fitness enthusiasts.",
+      image: facilityImage1,
+    },
+    {
+      number: 1,
+      title: "Library",
+      description: "A library with a diverse collection of books.",
+      image: facilityImage2,
+    },
+    {
+      number: 1,
+      title: "Clean Mess",
+      description: "A clean and hygienic mess offering healthy meals.",
+      image: facilityImage3,
+    },
+  ], []);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-
+    
+    // Animation for scrolling
     gsap.fromTo(
-      facilityRefs.current,
+      '.facility-card',
       { opacity: 0 },
       {
         opacity: 1,
@@ -29,7 +81,7 @@ const Facilities = () => {
         stagger: 0.3,
         ease: 'power3.out',
         scrollTrigger: {
-          trigger: facilityRefs.current,
+          trigger: '.facility-card',
           start: 'top 80%',
           end: 'top 50%',
           scrub: true,
@@ -50,75 +102,19 @@ const Facilities = () => {
 
       {/* Facilities Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {[
-          {
-            number: 570,
-            title: "Total Students",
-            description: "A vibrant community of 570 students fostering diversity and inclusion.",
-            image: facilityImage1,
-          },
-          {
-            number: 160,
-            title: "Rooms",
-            description: "160 spacious and well-furnished rooms with modern amenities.",
-            image: facilityImage2,
-          },
-          {
-            number: 30,
-            title: "Staff Members",
-            description: "A dedicated team of 30 staff ensures smooth operations.",
-            image: facilityImage3,
-          },
-          {
-            number: 7,
-            title: "TV Rooms",
-            description: "7 common TV rooms to relax and enjoy with friends.",
-            image: facilityImage1,
-          },
-          {
-            number: 14,
-            title: "Water Filters",
-            description: "14 water filters ensuring safe drinking water.",
-            image: facilityImage2,
-          },
-          {
-            number: 7,
-            title: "Washing Machines",
-            description: "7 washing machines for convenient laundry.",
-            image: facilityImage3,
-          },
-          {
-            number: 1,
-            title: "Gym",
-            description: "A well-equipped gym for fitness enthusiasts.",
-            image: facilityImage1,
-          },
-          {
-            number: 1,
-            title: "Library",
-            description: "A library with a diverse collection of books.",
-            image: facilityImage2,
-          },
-          {
-            number: 1,
-            title: "Clean Mess",
-            description: "A clean and hygienic mess offering healthy meals.",
-            image: facilityImage3,
-          },
-        ].map((facility, index) => (
+        {facilitiesData.map((facility, index) => (
           <motion.div
             key={index}
-            ref={addToRefs}
-            className="relative cursor-pointer"
+            className="relative cursor-pointer facility-card"
             initial={{ scale: 0.9 }}
             whileHover={{ scale: 1.05 }}
           >
             {/* Image Container */}
-            <div className="relative overflow-hidden rounded-lg group">
+            <div className="relative overflow-hidden rounded-lg group select-none">
               <img
                 src={facility.image}
                 alt={facility.title}
-                className="w-full h-40 object-cover rounded-lg transform transition-transform duration-300 group-hover:scale-110"
+                className="w-full h-40 object-cover rounded-lg transform transition-transform duration-300 group-hover:scale-110 select-none"
               />
               {/* Description (Hover Only) */}
               <motion.div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center text-white font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -128,8 +124,8 @@ const Facilities = () => {
 
             {/* Title and Animated Number (Below Image) */}
             <div className="mt-4 flex flex-col items-center">
-              <h3 className="text-xl font-semibold text-gray-800">{facility.title}</h3>
-              <div className="text-5xl font-bold text-indigo-600">
+              <h3 className="text-xl font-semibold text-gray-800 select-none">{facility.title}</h3>
+              <div className="text-5xl font-bold text-indigo-600 select-none">
                 <CountUp start={0} end={facility.number} duration={2} />
               </div>
             </div>
