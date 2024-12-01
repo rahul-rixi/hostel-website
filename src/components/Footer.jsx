@@ -50,6 +50,11 @@ const Footer = () => {
                   Contact
                 </Link>
               </li>
+              <li>
+                <Link to='/nearby' className="footer-link hover:text-blue-500 transition duration-200">
+                  Nearby places
+                </Link>
+              </li>
             </ul>
           </div>
 
