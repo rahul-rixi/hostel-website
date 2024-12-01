@@ -66,7 +66,7 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <div className="w-full mx-auto bg-gray-100 pb-12 pt-1  px-6 sm:px-12 md:px-24 lg:px-52 rounded-lg shadow-lg">
+    <div className="w-full mx-auto bg-gray-100 pb-12 pt-1  px-6 sm:px-12 md:px-24 lg:px-52 shadow-lg">
       <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
         What Our Hostel Residents Say
       </h2>
@@ -103,7 +103,7 @@ const TestimonialsSection = () => {
         ))}
       </Slider>
 
-      {/* Custom Styles for Dots */}
+
       <style jsx>{`
         .slick-dots {
           bottom: -30px; /* Adjust the position of dots */

@@ -8,6 +8,7 @@ import Gallery from "./pages/Gallary";
 import FacilitiesPage from './pages/DetailsPage';
 import HolidayComponent from './components/Holiday';
 import ContactPage from './pages/ContactPage';
+import LoginPage from './pages/Login';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/facilities" element={<FacilitiesPage/>} />
             <Route path="/holiday" element ={<HolidayComponent/>}/>
             <Route path ='/contact' element = {<ContactPage/>}/>
+            <Route path = '/login' element = {<LoginPage/>}/>
 
 
 

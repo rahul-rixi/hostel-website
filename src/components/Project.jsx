@@ -64,7 +64,7 @@ const Navbar = () => {
           </NavLink>
 
           <div className="hidden md:flex space-x-8 font-medium">
-            {['Home', 'Facilities', 'Gallery', 'Contact', 'FAQ'].map((link) => (
+            {['Home', 'Facilities', 'Gallery', 'Contact', 'Login'].map((link) => (
               <div key={link} className="relative group">
                 <NavLink
                   to={link === 'Home' ? '/' : `/${link.toLowerCase()}`}
