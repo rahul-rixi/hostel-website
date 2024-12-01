@@ -102,7 +102,7 @@ const Navbar = () => {
         style={{ width: '80%' }}
       >
         <ul className="flex flex-col gap-8 mt-10 px-6">
-          {['Home', 'Facilities', 'Gallery', 'Contact', 'FAQ'].map((link, index) => (
+          {['Home', 'Facilities', 'Gallery', 'Contact', 'Login'].map((link, index) => (
             <li
               key={link}
               className={`text-lg font-semibold text-[#333333] cursor-pointer transform hover:scale-105 transition-all duration-300 ease-out ${

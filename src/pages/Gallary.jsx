@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { gsap } from "gsap";
+import { gsap } from "gsap"; 
 import first1 from "../assets/first1.jpg";
 import second from "../assets/second.jpg";
 import third from "../assets/third.jpg";
@@ -9,7 +9,6 @@ import lake2 from "../assets/Lake2.jpg";
 
 const Gallery = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
-
   const images = [first1, second, third, lakeImage, lake2];
 
   useEffect(() => {
@@ -46,7 +45,7 @@ const Gallery = () => {
           Gallery
         </motion.h1>
 
-        {/* Gallery Sections */}
+        {/* Hostel Facilities Section */}
         <section className="w-full max-w-6xl px-4 mb-12">
           <motion.h2
             className="text-3xl font-semibold text-indigo-600 mb-4"
@@ -56,6 +55,9 @@ const Gallery = () => {
           >
             Hostel Facilities
           </motion.h2>
+          <div className="text-lg text-gray-700 mb-6">
+            <p>Here are some images showcasing the facilities at our hostel, from rooms to recreational areas!</p>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {images.map((image, index) => (
               <motion.div
@@ -68,6 +70,82 @@ const Gallery = () => {
                 <img
                   src={image}
                   alt={`Facility ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+                <motion.div
+                  className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center text-white font-semibold opacity-0 hover:opacity-100 transition-opacity duration-300"
+                  whileHover={{ opacity: 1 }}
+                >
+                  View Image
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Sports Section */}
+        <section className="w-full max-w-6xl px-4 mb-12">
+          <motion.h2
+            className="text-3xl font-semibold text-indigo-600 mb-4"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            Sports Events
+          </motion.h2>
+          <div className="text-lg text-gray-700 mb-6">
+            <p>Explore the exciting sports events and activities at our hostel!</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {images.map((image, index) => (
+              <motion.div
+                key={index}
+                className="relative overflow-hidden rounded-lg shadow-lg cursor-pointer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setSelectedImageIndex(index)}
+              >
+                <img
+                  src={image}
+                  alt={`Sports Event ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+                <motion.div
+                  className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center text-white font-semibold opacity-0 hover:opacity-100 transition-opacity duration-300"
+                  whileHover={{ opacity: 1 }}
+                >
+                  View Image
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Events Section */}
+        <section className="w-full max-w-6xl px-4 mb-12">
+          <motion.h2
+            className="text-3xl font-semibold text-indigo-600 mb-4"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            Hostel Events
+          </motion.h2>
+          <div className="text-lg text-gray-700 mb-6">
+            <p>Check out the pictures from festivals and events celebrated at our hostel!</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {images.map((image, index) => (
+              <motion.div
+                key={index}
+                className="relative overflow-hidden rounded-lg shadow-lg cursor-pointer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setSelectedImageIndex(index)}
+              >
+                <img
+                  src={image}
+                  alt={`Event ${index + 1}`}
                   className="w-full h-full object-cover"
                 />
                 <motion.div
@@ -124,18 +202,8 @@ const Gallery = () => {
           </motion.div>
         )}
 
-        {/* Quote Section */}
-        <div className="w-full max-w-6xl px-4 mt-12">
-          <motion.blockquote
-            className="text-center text-xl font-semibold text-gray-700 italic quote"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-          >
-            "The best way to predict the future is to create it." - Abraham
-            Lincoln
-          </motion.blockquote>
-        </div>
+     
+       
       </div>
     </>
   );

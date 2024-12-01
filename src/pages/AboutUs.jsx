@@ -7,15 +7,16 @@ gsap.registerPlugin(ScrollTrigger);
 
 const AboutUs = () => {
   const imageRef = useRef(null);
-  const valueRefs = useRef([]);
+  const textRefs = useRef([]);
 
-  const addValueRef = (el) => {
-    if (el && !valueRefs.current.includes(el)) {
-      valueRefs.current.push(el);
+  const addTextRef = (el) => {
+    if (el && !textRefs.current.includes(el)) {
+      textRefs.current.push(el);
     }
   };
 
   useEffect(() => {
+    // Image animation
     gsap.fromTo(
       imageRef.current,
       {
@@ -25,17 +26,18 @@ const AboutUs = () => {
       {
         opacity: 1,
         scale: 1,
-        duration: 0.8,
-        ease: 'ease.out',
+        duration: 0.6,
+        ease: 'power3.out',
         scrollTrigger: {
           trigger: imageRef.current,
-          start: 'top 75%',
+          start: 'top bottom', // Trigger when the top of the image reaches the bottom of the viewport
           toggleActions: 'play none none reverse',
         },
       }
     );
 
-    gsap.utils.toArray('.value-section').forEach((el, index) => {
+    // Text and div animations
+    textRefs.current.forEach((el, index) => {
       gsap.fromTo(
         el,
         {
@@ -45,34 +47,12 @@ const AboutUs = () => {
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
+          duration: 0.6,
           delay: index * 0.2,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: el,
-            start: 'top 75%',
-            toggleActions: 'play none none reverse',
-          },
-        }
-      );
-    });
-
-    gsap.utils.toArray('.stand-for-item').forEach((el, index) => {
-      gsap.fromTo(
-        el,
-        {
-          opacity: 0,
-          y: 30,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          delay: 0.2 + index * 0.2,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 75%',
+            start: 'top bottom', // Trigger when the top of the element reaches the bottom of the viewport
             toggleActions: 'play none none reverse',
           },
         }
@@ -86,8 +66,16 @@ const AboutUs = () => {
       style={{ userSelect: 'none' }} // Makes the entire section unselectable
     >
       <div className="text-center mb-10">
-        <h2 className="text-4xl font-bold text-gray-800 md:text-5xl">About Us</h2>
-        <p className="mt-4 text-gray-600 text-sm md:text-base max-w-3xl mx-auto">
+        <h2
+          ref={addTextRef}
+          className="text-4xl font-bold text-gray-800 md:text-5xl"
+        >
+          About Us
+        </h2>
+        <p
+          ref={addTextRef}
+          className="mt-4 text-gray-600 text-sm md:text-base max-w-3xl mx-auto"
+        >
           "Welcome to our hostel—a place where academic aspirations meet a supportive and comfortable living environment."
         </p>
       </div>
@@ -106,27 +94,44 @@ const AboutUs = () => {
         </div>
 
         <div>
-          <h3 className="text-2xl font-bold text-gray-700 mb-4">Our Story</h3>
-          <p className="value-section text-gray-700 text-sm md:text-base leading-relaxed">
+          <h3
+            ref={addTextRef}
+            className="text-2xl font-bold text-gray-700 mb-4"
+          >
+            Our Story
+          </h3>
+          <p
+            ref={addTextRef}
+            className="text-gray-700 text-sm md:text-base leading-relaxed"
+          >
             Our hostel, established in 2020, provides students with a perfect blend of academic focus and personal comfort. Designed to foster growth and learning, it’s a home away from home where lifelong memories and friendships are made.
           </p>
-          <h3 className="value-section text-2xl font-bold text-gray-700 mt-6 mb-4">
+          <h3
+            ref={addTextRef}
+            className="text-2xl font-bold text-gray-700 mt-6 mb-4"
+          >
             Mission & Vision
           </h3>
-          <p className="value-section text-gray-700 text-sm md:text-base leading-relaxed">
+          <p
+            ref={addTextRef}
+            className="text-gray-700 text-sm md:text-base leading-relaxed"
+          >
             We aim to offer a secure, inclusive, and welcoming environment for students. Our vision is to support academic excellence and create a vibrant community that values respect, diversity, and mutual growth.
           </p>
         </div>
       </div>
 
       <div className="mt-12">
-        <h3 className="text-3xl font-bold text-gray-800 text-center mb-6">
+        <h3
+          ref={addTextRef}
+          className="text-3xl font-bold text-gray-800 text-center mb-6"
+        >
           What We Stand For
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div
-            ref={addValueRef}
-            className="stand-for-item bg-white p-6 rounded-lg shadow-md border transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+            ref={addTextRef}
+            className="bg-white p-6 rounded-lg shadow-md border transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
           >
             <h4 className="text-lg font-bold text-gray-700 mb-3">Safety</h4>
             <p className="text-gray-600 text-sm">
@@ -134,8 +139,8 @@ const AboutUs = () => {
             </p>
           </div>
           <div
-            ref={addValueRef}
-            className="stand-for-item bg-white p-6 rounded-lg shadow-md border transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+            ref={addTextRef}
+            className="bg-white p-6 rounded-lg shadow-md border transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
           >
             <h4 className="text-lg font-bold text-gray-700 mb-3">Comfort</h4>
             <p className="text-gray-600 text-sm">
@@ -143,8 +148,8 @@ const AboutUs = () => {
             </p>
           </div>
           <div
-            ref={addValueRef}
-            className="stand-for-item bg-white p-6 rounded-lg shadow-md border transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+            ref={addTextRef}
+            className="bg-white p-6 rounded-lg shadow-md border transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
           >
             <h4 className="text-lg font-bold text-gray-700 mb-3">Community</h4>
             <p className="text-gray-600 text-sm">
