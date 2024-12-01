@@ -4,7 +4,7 @@ import first1 from '../assets/first1.jpg';
 import second from '../assets/second.jpg';
 import third from '../assets/third.jpg';
 import lakeImage from '../assets/Lake.jpg';
-import lake2 from '../assets/Lake2.jpg';
+import lake2 from '../assets/hostel4.webp';
 import { gsap } from 'gsap';
 
 const Header = () => {
@@ -102,7 +102,7 @@ const Header = () => {
             onClick={() => handleDotClick(index)}
             className={`h-4 rounded-full cursor-pointer transition-all duration-300`}
             style={{
-              backgroundColor: currentIndex === index ? '#00BFFF' : 'gray',
+              backgroundColor: currentIndex === index ? 'white' : 'gray',
               width: currentIndex === index ? '30px' : '10px',
               height: '10px',
               borderRadius: currentIndex === index ? '12px' : '50%',

@@ -6,7 +6,7 @@ import facilityImage1 from "../assets/first1.jpg";
 import facilityImage2 from "../assets/second.jpg";
 import facilityImage3 from "../assets/third.jpg";
 
-const Facilities = () => {
+const DetailsPage = () => {
   const facilityRefs = useRef([]);
   const numberRefs = useRef([]);
 
@@ -195,4 +195,4 @@ const Facilities = () => {
   );
 };
 
-export default Facilities;
+export default DetailsPage;
