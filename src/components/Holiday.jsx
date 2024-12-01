@@ -48,7 +48,7 @@ const HolidayComponent = () => {
         </thead>
         <tbody>
           {holidays.map((holiday, index) => (
-            <tr key={index} className="border-t hover:bg-indigo-50  transition duration-300 ease-in-out transform hover:scale-105">
+            <tr key={index} className="border-t hover:bg-indigo-50  transition duration-300 ease-in-out transform hover:scale-[1.02]">
               <td className="py-4 px-6 text-gray-800">{holiday.name}</td>
               <td className="py-4 px-6 text-gray-600">{holiday.date}</td>
               <td className="py-4 px-6 text-gray-600">{holiday.day}</td>
