@@ -2,6 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { FaStar } from "react-icons/fa";  // Import FaStar from react-icons
 import dp from "../assets/dp.jpeg"; // Import the image
 
 const TestimonialsSection = () => {
@@ -11,30 +12,35 @@ const TestimonialsSection = () => {
       title: "B.Tech 3rd Semester",
       text: "The hostel provides a peaceful and well-maintained environment. The staff is supportive, and the facilities are great for studying and relaxing.",
       image: dp, // Use the imported dp image here
+      rating: 5, // 5 stars rating
     },
     {
       name: "Anish Raj",
       title: "B.Tech 3rd Semester",
       text: "I really enjoy staying here. The rooms are spacious, and the food quality is always fresh and delicious. The hostel has a homely atmosphere.",
       image: dp, // Use the imported dp image here
+      rating: 4, // 4 stars rating
     },
     {
       name: "Amarjeet Singh",
       title: "B.Tech 3rd Semester",
       text: "The best part about the hostel is the fast Wi-Fi and the common areas where we can interact and study together. I feel comfortable and safe here.",
       image: dp, // Use the imported dp image here
+      rating: 5, // 5 stars rating
     },
     {
       name: "Ashish Kumar",
       title: "B.Tech 3rd Semester",
       text: "I am very happy with the cleanliness of the hostel. The staff is always ready to help, and the food is nutritious. It’s a great place for students.",
       image: dp, // Use the imported dp image here
+      rating: 5, // 5 stars rating
     },
     {
       name: "Amit Sharma",
       title: "B.Tech 3rd Semester",
       text: "Living here has been a great experience. The hostel provides all the necessary facilities, and the atmosphere is perfect for focusing on studies.",
       image: dp, // Use the imported dp image here
+      rating: 4, // 4 stars rating
     },
   ];
 
@@ -60,7 +66,7 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <div className="w-full mx-auto bg-gray-100 py-12 px-6 sm:px-12 md:px-24 lg:px-52 rounded-lg shadow-lg">
+    <div className="w-full mx-auto bg-gray-100 pb-12 pt-1  px-6 sm:px-12 md:px-24 lg:px-52 rounded-lg shadow-lg">
       <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
         What Our Hostel Residents Say
       </h2>
@@ -76,10 +82,22 @@ const TestimonialsSection = () => {
               <p className="italic text-lg text-gray-600 mb-4">
                 "{testimonial.text}"
               </p>
+               {/* Star Rating */}
+               <div className="flex justify-center mt-3 mb-3">
+                {Array.from({ length: 5 }, (_, i) => (
+                  <FaStar
+                    key={i}
+                    color={i < testimonial.rating ? "#FFD700" : "#D3D3D3"} // Gold for active stars, gray for inactive
+                    size={20}
+                  />
+                ))}
+              </div>
               <h4 className="text-xl font-semibold text-gray-800">
                 - {testimonial.name}
               </h4>
               <p className="text-sm text-gray-500">{testimonial.title}</p>
+
+             
             </div>
           </div>
         ))}
@@ -88,7 +106,7 @@ const TestimonialsSection = () => {
       {/* Custom Styles for Dots */}
       <style jsx>{`
         .slick-dots {
-          bottom: -40px; /* Adjust the position of dots */
+          bottom: -30px; /* Adjust the position of dots */
         }
         .slick-dots li button:before {
           font-size: 12px; /* Smaller dot size */
