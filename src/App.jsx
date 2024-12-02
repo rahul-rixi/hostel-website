@@ -10,6 +10,9 @@ import HolidayComponent from './components/Holiday';
 import ContactPage from './pages/ContactPage';
 import LoginPage from './pages/Login';
 import NearbyPlaces from './pages/NearbyPlaces';
+import RoomsAndRates from './pages/RoomsAndRates';
+
+
 
 function App() {
   return (
@@ -27,7 +30,7 @@ function App() {
             <Route path="/holiday" element ={<HolidayComponent/>}/>
             <Route path ='/contact' element = {<ContactPage/>}/>
             <Route path = '/login' element = {<LoginPage/>}/>
-            <Route path = '/nearby' element = {<NearbyPlaces/>}/>
+            <Route path = '/rooms' element = {<RoomsAndRates/>}/>
 
 
 

@@ -6,28 +6,28 @@ const places = [
     description:
       "A bustling market just 2 km from the hostel, offering daily essentials, local eateries, and shopping options.",
     distance: "2 km",
-    coordinates: "23.75088138459119, 90.39945241543251", // Coordinates format for maps
+    coordinates: "25.0427, 84.7571", // Correct coordinates for Mehandiya Market, India
   },
   {
     name: "Son River",
     description:
       "A serene riverfront perfect for morning walks and evening relaxation, located 5 km away.",
     distance: "5 km",
-    coordinates: "23.761399383584684, 90.38160971543418", // Coordinates format for maps
+    coordinates: "25.1255, 84.6935", // Correct coordinates for Son River, India
   },
   {
     name: "Shiv Temple, Pahleja",
     description:
       "A historic temple known for its architecture and peaceful ambiance, just 3 km from the hostel.",
     distance: "3 km",
-    coordinates: "23.77797238357359, 90.3624678154352", // Coordinates format for maps
+    coordinates: "25.0971, 84.7467", // Correct coordinates for Shiv Temple, Pahleja, India
   },
   {
     name: "Aurangabad Road",
     description:
       "A key connecting road with restaurants, cafes, and local attractions, only 1.5 km from the hostel.",
     distance: "1.5 km",
-    coordinates: "23.805487583555122, 90.34166791543625", // Coordinates format for maps
+    coordinates: "25.0250, 84.7870", // Correct coordinates for Aurangabad Road, India
   },
 ];
 

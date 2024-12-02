@@ -51,10 +51,11 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to='/nearby' className="footer-link hover:text-blue-500 transition duration-200">
-                  Nearby places
+                <Link to='/rooms' className="footer-link hover:text-blue-500 transition duration-200">
+                  RoomsInfo
                 </Link>
               </li>
+            
             </ul>
           </div>
 
