@@ -4,7 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import facilityImage1 from '../assets/first1.jpg';
 import facilityImage2 from '../assets/second.jpg';
-import facilityImage3 from '../assets/third.jpg';
+import facilityImage3 from '../assets/sports1.jpg';
+import room1 from '../assets/room1.jpg';
 
 const Facilities = () => {
   const facilityRefs = useRef([]);
@@ -61,7 +62,7 @@ const Facilities = () => {
         >
           <div className="overflow-hidden rounded-lg">
             <img
-              src={facilityImage1}
+              src={room1}
               alt="Facility 1"
               className="w-full h-40 object-cover rounded-lg transform group-hover:scale-110 transition-transform duration-300"
               style={{ userSelect: 'none', pointerEvents: 'none' }} // Make image unselectable
@@ -112,7 +113,7 @@ const Facilities = () => {
             />
           </div>
           <h3 className="text-lg font-bold text-gray-700 mt-4 mb-2 group-hover:text-indigo-600 transition-colors duration-300">
-            Recreational Spaces
+           Indoor Games
           </h3>
           <p className="text-gray-600 text-sm">
             Common areas with indoor games, reading rooms, and spaces for group activities.
