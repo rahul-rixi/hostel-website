@@ -13,7 +13,7 @@ const HostelSection = () => {
     if (el && !textRefs.current.includes(el)) {
       textRefs.current.push(el);
     }
-  };
+  };   
 
   useEffect(() => {
     // Image animation
@@ -31,7 +31,7 @@ const HostelSection = () => {
         scrollTrigger: {
           trigger: imageRef.current,
           start: "top 80%", // Trigger when the top of the image is 80% visible in the viewport
-          toggleActions: "play none none none", // Play only once
+          toggleActions: "play none none none", // Play only 
         },
       }
     );
