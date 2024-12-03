@@ -4,6 +4,7 @@ import AboutUs from './AboutUs';
 import PrincipalMessage from './PrincipleMessage';
 import Facilities from './Facilities';
 import TestimonialCarousel from '../components/Testimonials';
+import WardenMessage from './WardenMessage';
 
 
 
@@ -14,7 +15,8 @@ const HomePage = () => {
     <Header/>
     <AboutUs/>
     <PrincipalMessage/>
-   <Facilities/>
+    <WardenMessage/>
+   
     <TestimonialCarousel/>
 
   
