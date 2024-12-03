@@ -1,30 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import wardenImage from '../assets/warden.png';
+import wardenImage from '../assets/boydp.avif';
+
 const WardenMessage = () => {
   const sectionRef = useRef(null); // Reference to the section
   const [isVisible, setIsVisible] = useState(false); // State to track visibility
 
   useEffect(() => {
-    // Intersection Observer callback
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // If the section is in view, trigger the animations
           if (entry.isIntersecting) {
             setIsVisible(true);
           }
         });
       },
-      { threshold: 0.5 } // Trigger when 50% of the section is visible
+      { threshold: 0.5 }
     );
 
-    // Observe the section
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
 
-    // Cleanup observer on component unmount
     return () => {
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
@@ -34,10 +31,11 @@ const WardenMessage = () => {
 
   useEffect(() => {
     if (isVisible) {
-      // GSAP animation when the section becomes visible
+      const isMobile = window.innerWidth < 768; // Check for mobile view
+
       gsap.fromTo(
         '.warden-message-container',
-        { opacity: 0, y: 50 },
+        { opacity: 0, y: isMobile ? 30 : 50 },
         { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
       );
 
@@ -49,36 +47,47 @@ const WardenMessage = () => {
 
       gsap.fromTo(
         '.warden-info',
-        { opacity: 0, x: -100 },
+        { opacity: 0, x: isMobile ? 0 : -100 },
         { opacity: 1, x: 0, duration: 1, ease: 'power3.out', delay: 0.7 }
       );
     }
-  }, [isVisible]); // Trigger animation when `isVisible` changes to true
+  }, [isVisible]);
 
   return (
     <section ref={sectionRef} className="bg-gray-100 py-16">
-      <div className="max-w-screen-xl mx-auto text-center px-4 warden-message-container">
-        <h2 className="text-3xl font-semibold text-gray-700 mb-8">Message from the Warden</h2>
-        
-        <div className="flex justify-center items-center flex-wrap space-x-8 mt-8">
+      <div className="max-w-screen-xl mx-auto px-4 warden-message-container">
+        <h2 className="text-3xl font-semibold text-gray-700 mb-8 text-center">
+          Message from the Warden
+        </h2>
+
+        <div className="flex flex-col md:flex-row justify-center items-center md:space-x-8 mt-8 space-y-8 md:space-y-0">
           <div className="w-60 h-60 rounded-full overflow-hidden shadow-lg warden-image">
-            <img src={wardenImage} alt="Warden" className="w-full h-full object-cover" />
+            <img
+              src={wardenImage}
+              alt="Warden"
+              className="w-full h-full object-cover"
+            />
           </div>
-          
-          <div className="max-w-lg warden-info">
+
+          <div className="max-w-lg warden-info text-center md:text-left">
             <h3 className="text-2xl font-semibold text-gray-800">Mr. John Doe</h3>
             <p className="text-lg font-medium text-gray-600">Head Warden</p>
             <p className="mt-4 text-gray-600 italic">
-              "Welcome to our college hostel! It’s my privilege to ensure a safe and comfortable environment for all students. Our goal is to foster personal growth, discipline, and camaraderie among students. Together, we can create a positive and supportive community. I look forward to working with each of you to make your stay memorable and enriching."
+              "Welcome to our college hostel! It’s my privilege to ensure a safe
+              and comfortable environment for all students. Our goal is to foster
+              personal growth, discipline, and camaraderie among students.
+              Together, we can create a positive and supportive community. I look
+              forward to working with each of you to make your stay memorable and
+              enriching."
             </p>
             <p className="mt-6 text-gray-700 font-medium">
-              <strong>Contact:</strong> warden@college.edu | +91-XXXX-XXXXXX
+              <strong>Contact:</strong> +91-XXXX-XXXXXX
             </p>
           </div>
         </div>
       </div>
     </section>
   );
-}
+};
 
 export default WardenMessage;
