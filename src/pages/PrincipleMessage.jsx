@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Rahul from "../assets/principleimage.jpg"; 
+import principleImage from "../assets/principle.jpg"; 
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -66,7 +66,7 @@ const HostelSection = () => {
         {/* Image Section */}
         <img
           ref={imageRef}
-          src={Rahul}
+          src={principleImage}
           alt="Principal"
           className="w-48 h-48 md:w-60 md:h-60 rounded-lg shadow-md mb-6 md:mb-0 object-cover flex-shrink-0"
         />
