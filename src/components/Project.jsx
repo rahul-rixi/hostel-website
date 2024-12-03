@@ -76,12 +76,12 @@ const Navbar = () => {
                   <span className="select-none">{link}</span>
                 </NavLink>
 
-                {/* Hover Underline */}
+        
                 <div
                   className="absolute left-0 bottom-0 w-full h-1 bg-indigo-600 scale-x-0 group-hover:scale-x-100 transition-all duration-300 ease-in-out z-10"
                 ></div>
 
-                {/* Active Link Underline - Reduced length and black color */}
+                
                 <div
                   className="absolute left-0 bottom-0 w-[60%] h-1 bg-black scale-x-0 group-active:scale-x-100 transition-all duration-300 ease-in-out z-20"
                 ></div>
