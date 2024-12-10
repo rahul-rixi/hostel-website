@@ -2,3 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    /* Light Mode Colors */
+    --bg-light: #ffffff;
+    --text-light: #333333;
+    --text-light-secondary: #666666;
+    --primary-light: #4C51BF;
+    --secondary-light: #F7FAFC;
+  
+    /* Dark Mode Colors */
+    --bg-dark: #282828;
+    --text-dark: #CCCCCC;
+    --text-dark-secondary: #999999;
+    --primary-dark: #90CDF4;
+    --secondary-dark: #1A202C;
+  }
+  
+  /* Default theme (light mode) */
+  body {
+    background-color: var(--bg-light);
+    color: var(--text-light);
+  }
+  
+  /* Dark mode */
+  body.dark-mode {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+  }
+  
+

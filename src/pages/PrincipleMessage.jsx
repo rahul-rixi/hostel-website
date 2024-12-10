@@ -1,11 +1,13 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import principleImage from "../assets/principle.jpg"; 
+import { ThemeContext } from "../ThemeContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const HostelSection = () => {
+  const { theme } = useContext(ThemeContext);
   const imageRef = useRef(null);
   const textRefs = useRef([]);
 
@@ -13,7 +15,7 @@ const HostelSection = () => {
     if (el && !textRefs.current.includes(el)) {
       textRefs.current.push(el);
     }
-  };   
+  };
 
   useEffect(() => {
     // Image animation
@@ -61,7 +63,11 @@ const HostelSection = () => {
   }, []);
 
   return (
-    <div className="bg-gray-100 p-6 md:p-10 flex justify-center items-center shadow-lg w-full mx-auto">
+    <div
+      className={`p-6 md:p-10 flex justify-center items-center shadow-lg w-full mx-auto ${
+        theme === 'light' ? 'bg-[var(--bg-light)] text-[var(--text-light)]' : 'bg-[var(--bg-dark)] text-[var(--text-dark)]'
+      }`}
+    >
       <div className="flex flex-col md:flex-row items-center md:items-start md:gap-28">
         {/* Image Section */}
         <img
@@ -75,25 +81,38 @@ const HostelSection = () => {
         <div className="text-center md:text-left max-w-xl space-y-4">
           <h2
             ref={addTextRef}
-            className="text-2xl md:text-3xl font-bold text-gray-800"
+            className={`text-2xl md:text-3xl font-bold ${
+              theme === 'light' ? 'text-[var(--text-light)]' : 'text-[var(--text-dark)]'
+            }`}
           >
             Message from the Principal
           </h2>
-          <p ref={addTextRef} className="text-gray-600">
+          <p
+            ref={addTextRef}
+            className={`${
+              theme === 'light' ? 'text-[var(--text-light-secondary)]' : 'text-[var(--text-dark-secondary)]'
+            }`}
+          >
             Dear Students, welcome to our college hostel—a home away from home.
             Here, you will find a safe, comfortable, and inclusive environment
             that nurtures academic growth and personal development.
           </p>
-          <p ref={addTextRef} className="text-gray-600">
+          <p
+            ref={addTextRef}
+            className={`${
+              theme === 'light' ? 'text-[var(--text-light-secondary)]' : 'text-[var(--text-dark-secondary)]'
+            }`}
+          >
             Make the most of your time here, respect each other, and embrace
             opportunities for learning and building friendships. Together, we
             create a community of excellence.
           </p>
-          <div ref={addTextRef} className="mt-6">
-            <p className="text-gray-800 font-bold">Best regards, Pranav Kumar,</p>
-            <p className="text-gray-800 font-bold">
-              Government Engineering College Arwal
-            </p>
+          <div
+            ref={addTextRef}
+            className={`mt-6 ${theme === 'light' ? 'text-[var(--text-light)]' : 'text-[var(--text-dark)]'}`}
+          >
+            <p className="font-bold">Best regards, Pranav Kumar,</p>
+            <p className="font-bold">Government Engineering College Arwal</p>
           </div>
         </div>
       </div>

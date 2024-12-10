@@ -1,8 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import { gsap } from 'gsap';
 import wardenImage from '../assets/boydp.avif';
+import { ThemeContext } from '../ThemeContext';
 
 const WardenMessage = () => {
+  const { theme } = useContext(ThemeContext);
   const sectionRef = useRef(null); // Reference to the section
   const [isVisible, setIsVisible] = useState(false); // State to track visibility
 
@@ -54,9 +56,12 @@ const WardenMessage = () => {
   }, [isVisible]);
 
   return (
-    <section ref={sectionRef} className="bg-gray-100 py-16">
+    <section
+      ref={sectionRef}
+      className={`py-16 ${theme === 'light' ? 'bg-[var(--bg-light)]' : 'bg-[var(--bg-dark)]'} transition-colors duration-300`}
+    >
       <div className="max-w-screen-xl mx-auto px-4 warden-message-container">
-        <h2 className="text-3xl font-semibold text-gray-700 mb-8 text-center">
+        <h2 className={`text-3xl font-semibold mb-8 text-center ${theme === 'light' ? 'text-[var(--text-light)]' : 'text-[var(--text-dark)]'}`}>
           Message from the Warden
         </h2>
 
@@ -69,18 +74,15 @@ const WardenMessage = () => {
             />
           </div>
 
-          <div className="max-w-lg warden-info text-center md:text-left">
-            <h3 className="text-2xl font-semibold text-gray-800">Mr. John Doe</h3>
-            <p className="text-lg font-medium text-gray-600">Head Warden</p>
-            <p className="mt-4 text-gray-600 italic">
-              "Welcome to our college hostel! It’s my privilege to ensure a safe
-              and comfortable environment for all students. Our goal is to foster
-              personal growth, discipline, and camaraderie among students.
-              Together, we can create a positive and supportive community. I look
-              forward to working with each of you to make your stay memorable and
-              enriching."
+          <div className={`max-w-lg warden-info text-center md:text-left ${theme === 'light' ? 'text-[var(--text-light)]' : 'text-[var(--text-dark)]'}`}>
+            <h3 className={`text-2xl font-semibold ${theme === 'light' ? 'text-[var(--text-light)]' : 'text-[var(--text-dark)]'}`}>Mr. John Doe</h3>
+            <p className={`text-lg font-medium ${theme === 'light' ? 'text-[var(--text-light-secondary)]' : 'text-[var(--text-dark-secondary)]'}`}>Head Warden</p>
+            <p className={`mt-4 italic ${theme === 'light' ? 'text-[var(--text-light-secondary)]' : 'text-[var(--text-dark-secondary)]'}`}>
+              "Welcome to our college hostel! It’s my privilege to ensure a safe and comfortable environment for all students. Our goal is to foster
+              personal growth, discipline, and camaraderie among students. Together, we can create a positive and supportive community. I look forward
+              to working with each of you to make your stay memorable and enriching."
             </p>
-            <p className="mt-6 text-gray-700 font-medium">
+            <p className={`mt-6 font-medium ${theme === 'light' ? 'text-[var(--text-light)]' : 'text-[var(--text-dark)]'}`}>
               <strong>Contact:</strong> +91-XXXX-XXXXXX
             </p>
           </div>

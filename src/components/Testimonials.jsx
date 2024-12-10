@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { FaStar } from "react-icons/fa";  // Import FaStar from react-icons
+import { FaStar } from "react-icons/fa"; // Import FaStar from react-icons
 import dp from "../assets/dp.jpeg"; // Import the image
+import { ThemeContext } from '../ThemeContext';
 
 const TestimonialsSection = () => {
+  const { theme } = useContext(ThemeContext);
+
   const testimonials = [
     {
       name: "Rahul Kumar",
@@ -66,20 +69,20 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <div className="w-full mx-auto bg-gray-100 pb-12 pt-1  px-6 sm:px-12 md:px-24 lg:px-52 shadow-lg">
-      <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+    <div className={`w-full mx-auto pb-12 pt-1 px-6 sm:px-12 md:px-24 lg:px-52 shadow-lg ${theme === 'light' ? 'bg-gray-100 text-gray-800' : 'bg-gray-800 text-gray-200'}`}>
+      <h2 className="text-3xl font-bold mb-6 text-center">
         What Our Hostel Residents Say
       </h2>
       <Slider {...settings}>
         {testimonials.map((testimonial, index) => (
           <div key={index} className="relative">
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
+            <div className={`p-6 rounded-lg shadow-md text-center ${theme === 'light' ? 'bg-white text-gray-800' : 'bg-gray-700 text-gray-300'}`}>
               <img
                 src={testimonial.image} // Use the imported dp.jpeg here
                 alt={testimonial.name}
                 className="mx-auto rounded-full w-24 h-24 sm:w-32 sm:h-32 object-cover mb-4"
               />
-              <p className="italic text-lg text-gray-600 mb-4">
+              <p className="italic text-lg mb-4">
                 "{testimonial.text}"
               </p>
                {/* Star Rating */}
@@ -92,10 +95,10 @@ const TestimonialsSection = () => {
                   />
                 ))}
               </div>
-              <h4 className="text-xl font-semibold text-gray-800">
+              <h4 className="text-xl font-semibold">
                 - {testimonial.name}
               </h4>
-              <p className="text-sm text-gray-500">{testimonial.title}</p>
+              <p className="text-sm">{testimonial.title}</p>
 
              
             </div>
