@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import Checkbox from './Checkbox';
 import { ThemeContext } from '../ThemeContext'; // Import ThemeContext
 import Switch from './Switch'; // Import the Switch component
-
+  
 const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext); // Use the theme and toggle function from context
 
@@ -56,15 +56,24 @@ const Navbar = () => {
     };
   }, [navbarVisible]);
 
+  useEffect(() => {
+    // Prevent scrolling when the menu is open
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isMenuOpen]);
+
   return (
     <>
       <div className="max-w-[90%] mx-auto">
         <nav
-          className={`h-16 w-full flex justify-between items-center px-8 backdrop-blur-lg shadow-lg z-50 fixed top-0 left-0 right-0 transition-all duration-300 ease-in-out ${
+          className={`h-16 w-full flex justify-between items-center px-4 md:px-8 backdrop-blur-lg shadow-lg z-50 fixed top-0 left-0 right-0 transition-all duration-300 ease-in-out ${
             navbarVisible ? 'translate-y-0' : '-translate-y-full'
           } ${theme === 'light' ? 'bg-white bg-opacity-70 text-gray-800' : 'bg-gray-900 bg-opacity-70 text-gray-300'}`}
         >
-          <NavLink to="/" className="text-3xl font-bold tracking-wider flex items-center">
+          <NavLink to="/" className="text-2xl md:text-3xl font-bold tracking-wider flex items-center">
             <span className={`text-indigo-600`}>Hostel</span>
             <span className={`ml-1 ${theme === 'light' ? 'text-gray-900' : 'text-gray-100'}`}>Connect</span>
           </NavLink>
@@ -78,16 +87,11 @@ const Navbar = () => {
                     theme === 'light' ? 'text-gray-800' : 'text-gray-300'
                   }`}
                   style={({ isActive }) => ({
-                    color: isActive ? '#4C51BF' : theme === 'light' ? '#333333' : '#CCCCCC', // Active color (indigo) and default text
+                    color: isActive ? '#4C51BF' : theme === 'light' ? '#333333' : '#CCCCCC',
                   })}
                 >
                   <span className="select-none">{link}</span>
-
-                  {/* Hover Underline */}
                   <div className="absolute left-0 bottom-0 w-full h-1 bg-indigo-600 scale-x-0 group-hover:scale-x-100 transition-all duration-300 ease-in-out z-10"></div>
-
-                  {/* Active Link Underline */}
-                  <div className="absolute left-0 bottom-0 w-[60%] h-1 bg-black scale-x-0 group-active:scale-x-100 transition-all duration-300 ease-in-out z-20"></div>
                 </NavLink>
               </div>
             ))}
@@ -98,7 +102,7 @@ const Navbar = () => {
             <Switch toggleTheme={toggleTheme} />
 
             <div className="md:hidden">
-              <Checkbox checked={isMenuOpen} onChange={toggleMenu} className="text-black hover:text-gray-700 transition-all duration-300" />
+              <Checkbox checked={isMenuOpen} onChange={toggleMenu} />
             </div>
           </div>
         </nav>
@@ -108,37 +112,25 @@ const Navbar = () => {
       <div
         className={`fixed top-0 left-0 h-screen z-50 transform ${
           isMenuOpen ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform duration-300 ease-in-out ${theme === 'light' ? 'bg-white bg-opacity-95 text-gray-800' : 'bg-gray-900 bg-opacity-95 text-gray-300'}`}
+        } transition-transform duration-300 ease-in-out ${theme === 'light' ? 'bg-white text-gray-800' : 'bg-gray-900 text-gray-300'}`}
         style={{ width: '80%' }}
       >
-        <ul className="flex flex-col gap-8 mt-10 px-6">
+        <ul className="flex flex-col gap-6 mt-10 px-6">
           {['Home', 'Facilities', 'Gallery', 'Contact', 'Login'].map((link, index) => (
             <li
               key={link}
-              className={`text-lg font-semibold cursor-pointer transform hover:scale-105 transition-all duration-300 ease-out ${
-                isMenuOpen ? 'opacity-100' : 'opacity-0'
-              }`}
-              style={{
-                animationDelay: `${index * 0.1}s`,
-              }}
-              onClick={() => {
-                setIsMenuOpen(false);
-              }}
+              className={`text-lg font-semibold cursor-pointer transform hover:scale-105 transition-all duration-300 ease-out`}
+              style={{ animationDelay: `${index * 0.1}s` }}
+              onClick={() => setIsMenuOpen(false)}
             >
               <NavLink
                 to={link === 'Home' ? '/' : `/${link.toLowerCase()}`}
                 className="block px-4 py-3 bg-transparent rounded-lg hover:bg-opacity-20 transition-all duration-300"
                 style={({ isActive }) => ({
-                  color: isActive ? '#4C51BF' : theme === 'light' ? '#333333' : '#CCCCCC', // Active color (indigo) and default text
+                  color: isActive ? '#4C51BF' : theme === 'light' ? '#333333' : '#CCCCCC',
                 })}
               >
-                <span className="select-none">{link}</span>
-
-                {/* Hover Underline */}
-                <div className="absolute left-0 bottom-0 w-full h-1 bg-indigo-600 scale-x-0 group-hover:scale-x-100 transition-all duration-300 ease-in-out z-10"></div>
-
-                {/* Active Link Underline */}
-                <div className="absolute left-0 bottom-0 w-[60%] h-1 bg-black scale-x-0 group-active:scale-x-100 transition-all duration-300 ease-in-out z-20"></div>
+                <span>{link}</span>
               </NavLink>
             </li>
           ))}
