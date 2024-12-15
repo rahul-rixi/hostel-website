@@ -1,12 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ThemeContext } from "../ThemeContext";
 
 import facilityImage1 from "../assets/first1.jpg";
 import facilityImage2 from "../assets/second.jpg";
 import facilityImage3 from "../assets/third.jpg";
 
 const DetailsPage = () => {
+  const { theme } = useContext(ThemeContext);
   const facilityRefs = useRef([]);
   const numberRefs = useRef([]);
 
@@ -62,11 +64,27 @@ const DetailsPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-800 py-12 px-6 md:px-20 pt-32">
+    <div
+      className={`min-h-screen py-12 px-6 md:px-20 pt-32 ${
+        theme === "light"
+          ? "bg-gray-100 text-gray-800"
+          : "bg-gray-900 text-gray-300"
+      }`}
+    >
       {/* Header Section */}
       <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold text-gray-800">Hostel Facilities</h2>
-        <p className="mt-4 text-gray-600 text-sm md:text-base max-w-3xl mx-auto">
+        <h2
+          className={`text-4xl font-bold ${
+            theme === "light" ? "text-gray-800" : "text-gray-100"
+          }`}
+        >
+          Hostel Facilities
+        </h2>
+        <p
+          className={`mt-4 text-sm md:text-base max-w-3xl mx-auto ${
+            theme === "light" ? "text-gray-600" : "text-gray-400"
+          }`}
+        >
           Our hostel offers a wide range of facilities designed to provide students with a comfortable, convenient, and secure living environment.
         </p>
       </div>
@@ -124,14 +142,22 @@ const DetailsPage = () => {
                 className="w-full h-40 object-cover rounded-lg transform transition-transform duration-300 group-hover:scale-110"
               />
               {/* Description (Hover Only) */}
-              <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center text-white font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <p className="text-center text-sm px-4">{facility.description}</p>
+              <div className="absolute inset-0 bg-black bg-opacity-80 flex items-center justify-center text-gray-200 font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <p className="text-center text-sm px-4 drop-shadow-md">
+                  {facility.description}
+                </p>
               </div>
             </div>
 
             {/* Title and Animated Number (Below Image) */}
             <div className="mt-4 flex flex-col items-center">
-              <h3 className="text-xl font-semibold text-gray-800">{facility.title}</h3>
+              <h3
+                className={`text-xl font-semibold ${
+                  theme === "light" ? "text-gray-800" : "text-gray-100"
+                }`}
+              >
+                {facility.title}
+              </h3>
               <div
                 ref={(el) => addToRefs(el, numberRefs)}
                 data-end-value={facility.number}
@@ -146,48 +172,84 @@ const DetailsPage = () => {
 
       {/* What Makes Us Better Section */}
       <div className="text-center mt-16">
-        <h2 className="text-4xl font-bold text-gray-800 relative inline-block">
+        <h2
+          className={`text-4xl font-bold relative inline-block ${
+            theme === "light" ? "text-gray-800" : "text-gray-100"
+          }`}
+        >
           What Makes Us Better
           <span className="absolute left-0 bottom-0 h-1 w-full bg-indigo-500 transform scale-x-0 origin-left transition-transform duration-300 ease-in-out hover:scale-x-100"></span>
         </h2>
-        <p className="mt-4 text-gray-600 text-sm md:text-base max-w-3xl mx-auto">
+        <p
+          className={`mt-4 text-sm md:text-base max-w-3xl mx-auto ${
+            theme === "light" ? "text-gray-600" : "text-gray-400"
+          }`}
+        >
           Explore the additional features that make our hostel a top choice for students.
         </p>
       </div>
 
-      {/* Features Grid (What Makes Us Better Section) */}
+      {/* Features Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
         {[
-          { title: "24/7 Security", description: "Our hostel is equipped with 24/7 security to ensure safety.", image: facilityImage1 },
-          { title: "Wi-Fi Connectivity", description: "High-speed internet is available throughout the hostel.", image: facilityImage2 },
-          { title: "24/7 Power Supply", description: "Enjoy uninterrupted power supply at any time of the day.", image: facilityImage3 },
-          { title: "Water Cooler with Purifier", description: "Safe drinking water is ensured with water coolers and purifiers.", image: facilityImage1 },
-          { title: "CCTV Support", description: "Our premises are under constant CCTV surveillance for security.", image: facilityImage2 },
-          { title: "Photostat Shop", description: "A photocopy (Xerox) shop is available within the hostel building.", image: facilityImage3 },
-          { title: "24/7 Maintenance Support", description: "Our maintenance team is available 24/7 for any issues.", image: facilityImage1 },
-          { title: "Common Room with Cable TV", description: "Relax in our spacious common room with cable TV for entertainment.", image: facilityImage2 },
-          { title: "24/7 Medical Support", description: "Our hostel provides 24/7 medical support for students.", image: facilityImage3 },
+          {
+            title: "24/7 Security",
+            description: "Our hostel is equipped with 24/7 security to ensure safety.",
+            image: facilityImage1,
+          },
+          {
+            title: "Wi-Fi Connectivity",
+            description: "High-speed internet is available throughout the hostel.",
+            image: facilityImage2,
+          },
+          {
+            title: "24/7 Power Supply",
+            description: "Enjoy uninterrupted power supply at any time of the day.",
+            image: facilityImage3,
+          },
+          {
+            title: "Water Cooler with Purifier",
+            description: "Safe drinking water is ensured with water coolers and purifiers.",
+            image: facilityImage1,
+          },
+          {
+            title: "CCTV Support",
+            description: "Our premises are under constant CCTV surveillance for security.",
+            image: facilityImage2,
+          },
+          {
+            title: "24/7 Medical Support",
+            description: "Our hostel provides 24/7 medical support for students.",
+            image: facilityImage3,
+          },
         ].map((feature, index) => (
           <div
             key={index}
-            className="group relative bg-white p-6 rounded-lg shadow-md border overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:scale-105"
-            style={{ userSelect: "none" }}
+            className={`group relative p-6 rounded-lg shadow-md border overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:scale-105 ${
+              theme === "light" ? "bg-white" : "bg-gray-800"
+            }`}
           >
             <div className="overflow-hidden rounded-lg">
               <img
                 src={feature.image}
                 alt={feature.title}
                 className="w-full h-40 object-cover rounded-lg transform group-hover:scale-110 transition-transform duration-300"
-                style={{ userSelect: "none", pointerEvents: "none" }}
               />
             </div>
-            <h3 className="text-lg font-bold text-gray-700 mt-4 mb-2 group-hover:text-blue-600 transition-colors duration-300">
+            <h3
+              className={`text-lg font-bold mt-4 mb-2 group-hover:text-blue-600 transition-colors duration-300 ${
+                theme === "light" ? "text-gray-700" : "text-gray-100"
+              }`}
+            >
               {feature.title}
             </h3>
-            <p className="text-gray-600 text-sm group-hover:text-gray-800 transition-colors duration-300">
+            <p
+              className={`text-sm ${
+                theme === "light" ? "text-gray-600" : "text-gray-400"
+              }`}
+            >
               {feature.description}
             </p>
-            <span className="absolute inset-0 bg-blue-500 opacity-5 group-hover:opacity-20 transition-opacity duration-300"></span>
           </div>
         ))}
       </div>

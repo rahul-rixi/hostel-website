@@ -31,7 +31,7 @@ const StudentSection = () => {
 <div className='flex flex-col items-center'>
 <img className='h-10 w-10 bg-slate-500 border rounded-full ' src={bookpng} alt="" />
 <h1 className='text-2xl font-bold text-gray-200'>&nbsp; 1000+</h1>
-<p className='font-semibold text-gray-500'>Ccurrent Enrollment</p>
+<p className='font-semibold text-gray-500'>Current Enrollment</p>
 </div>
 
 </div>

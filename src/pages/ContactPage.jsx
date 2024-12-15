@@ -1,7 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import { gsap } from 'gsap';
+import { ThemeContext } from '../ThemeContext';
 
 const ContactListCompact = () => {
+  const { theme } = useContext(ThemeContext);
   const tableRef = useRef(null); // Reference to the table for animation
 
   const data = [
@@ -33,34 +35,34 @@ const ContactListCompact = () => {
   }, []);
 
   return (
-    <section className="bg-gray-100 py-16">
+    <section className={`py-16 ${theme === 'light' ? 'bg-gray-100' : 'bg-gray-800'}`}>
       <div className="max-w-screen-lg mx-auto px-4">
-        <h1 className="text-3xl font-bold text-gray-800 text-center mb-10">
+        <h1 className={`text-3xl font-bold text-center mb-10 ${theme === 'light' ? 'text-gray-800' : 'text-gray-100'}`}>
           Contact Directory
         </h1>
 
-        <div className="overflow-x-auto bg-white shadow-md rounded-lg">
+        <div className={`overflow-x-auto shadow-md rounded-lg ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}>
           <table
             ref={tableRef}
             className="w-full text-left border-collapse"
           >
             <thead>
-              <tr className="bg-gray-200">
-                <th className="py-4 px-6 text-gray-600 font-medium">Role</th>
-                <th className="py-4 px-6 text-gray-600 font-medium">Name</th>
-                <th className="py-4 px-6 text-gray-600 font-medium">Phone</th>
+              <tr className={theme === 'light' ? 'bg-gray-200 text-gray-600' : 'bg-gray-900 text-white'}>
+                <th className="py-4 px-6 font-medium">Role</th>
+                <th className="py-4 px-6 font-medium">Name</th>
+                <th className="py-4 px-6 font-medium">Phone</th>
               </tr>
             </thead>
             <tbody>
               {data.map((contact, index) => (
                 <tr
                   key={index}
-                  className={`hover:bg-gray-50 ${
-                    index % 2 === 0 ? "bg-gray-100" : "bg-white"
+                  className={`hover:bg-slate-500 hover:text-black ${
+                    index % 2 === 0 ? (theme === 'light' ? 'bg-gray-100' : 'bg-gray-700') : (theme === 'light' ? 'bg-white' : 'bg-gray-800')
                   }`}
                 >
-                  <td className="py-4 px-6 text-gray-800">{contact.role}</td>
-                  <td className="py-4 px-6 text-gray-800">{contact.name}</td>
+                  <td className={`py-4 px-6 ${theme === 'light' ? 'text-gray-800' : 'text-gray-300'}`}>{contact.role}</td>
+                  <td className={`py-4 px-6 ${theme === 'light' ? 'text-gray-800' : 'text-gray-300'}`}>{contact.name}</td>
                   <td className="py-4 px-6 text-blue-600 font-medium">
                     <a href={`tel:${contact.phone}`}>{contact.phone}</a>
                   </td>

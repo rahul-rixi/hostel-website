@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from '../ThemeContext';
 
 const holidays = [
   { name: "New Year's Day", date: "1st January", day: "Monday", totalDays: "1 day" },
@@ -34,11 +35,13 @@ const holidays = [
 ];
 
 const HolidayComponent = () => {
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <div className="bg-white p-8 rounded-lg shadow-lg w-full mx-auto overflow-x-auto ">
-      <h1 className="text-3xl mt-16 font-bold text-center mb-6 text-gray-800">Holiday List</h1>
-      <table className="min-w-full table-auto bg-white shadow-md rounded-lg overflow-hidden">
-        <thead className="bg-indigo-600 text-white">
+    <div className={`p-8 rounded-lg shadow-lg w-full mx-auto overflow-x-auto ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}>
+      <h1 className={`text-3xl mt-16 font-bold text-center mb-6 ${theme === 'light' ? 'text-gray-800' : 'text-gray-100'}`}>Holiday List</h1>
+      <table className={`min-w-full table-auto shadow-md rounded-lg overflow-hidden ${theme === 'light' ? 'bg-white' : 'bg-gray-900'}`}>
+        <thead className={theme === 'light' ? 'bg-indigo-600 text-white' : 'bg-indigo-700 text-gray-100'}>
           <tr>
             <th className="py-4 px-6 text-left">Vacation Name</th>
             <th className="py-4 px-6 text-left">Date</th>
@@ -48,11 +51,11 @@ const HolidayComponent = () => {
         </thead>
         <tbody>
           {holidays.map((holiday, index) => (
-            <tr key={index} className="border-t hover:bg-indigo-50  transition duration-300 ease-in-out transform hover:scale-[1.02]">
-              <td className="py-4 px-6 text-gray-800">{holiday.name}</td>
-              <td className="py-4 px-6 text-gray-600">{holiday.date}</td>
-              <td className="py-4 px-6 text-gray-600">{holiday.day}</td>
-              <td className="py-4 px-6 text-gray-600">{holiday.totalDays}</td>
+            <tr key={index} className={`border-t transition duration-300 ease-in-out transform hover:scale-[1.02] ${theme === 'light' ? 'hover:bg-indigo-50' : 'hover:bg-gray-700'}`}>
+              <td className={`py-4 px-6 ${theme === 'light' ? 'text-gray-800' : 'text-gray-300'}`}>{holiday.name}</td>
+              <td className={`py-4 px-6 ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>{holiday.date}</td>
+              <td className={`py-4 px-6 ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>{holiday.day}</td>
+              <td className={`py-4 px-6 ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>{holiday.totalDays}</td>
             </tr>
           ))}
         </tbody>

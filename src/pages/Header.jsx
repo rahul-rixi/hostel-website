@@ -56,7 +56,7 @@ const Header = () => {
 
   return (
     <div className="relative">
-      {/* Slider Section */}
+    {/* Slider Section */}  
       <Slider {...settings} className="h-[100vh]">
         {images.map((image, index) => (
           <div key={index} className="h-full relative">
