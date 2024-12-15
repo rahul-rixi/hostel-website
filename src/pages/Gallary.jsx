@@ -9,7 +9,7 @@ import lake2 from "../assets/Lake2.jpg";
 import { ThemeContext } from '../ThemeContext';
 
 const Gallery = () => {
-  const { theme } = useContext(ThemeContext);
+  const { theme, bgColour, textColour, subTextColour, containerColour } = useContext(ThemeContext);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const images = [first1, second, third, lakeImage, lake2];
 
@@ -36,27 +36,33 @@ const Gallery = () => {
   };
 
   return (
-    <div className={`min-h-screen flex flex-col items-center py-12 pt-24 ${theme === 'light' ? 'bg-gray-100 text-gray-700' : 'bg-[--bg-dark] text-gray-300'}`}>
+    <div className={`min-h-screen flex flex-col items-center py-12 pt-24 ${theme === 'light' ? 'bg-gray-100 text-gray-700' : 'bg-[--bg-dark] text-gray-300'}`}
+      style={{ backgroundColor: bgColour }}
+    >
       <motion.h1
-        className="text-4xl font-bold mb-12"
+        className={`text-4xl font-bold mb-12 ${theme === 'light' ? 'text-gray-900' : 'text-white'}`}
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
+        style={{ color: textColour }}
       >
         Gallery
       </motion.h1>
 
       {/* Hostel Facilities Section */}
-      <section className="w-full max-w-6xl px-4 mb-12">
+      <section className={`w-full max-w-6xl px-4 mb-12 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}
+        style={{ backgroundColor: bgColour }}>
         <motion.h2
-          className="text-3xl font-semibold mb-4"
+          className={`text-3xl font-semibold mb-4 ${theme === 'light' ? 'text-gray-900' : 'text-white'}`}
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
+          style={{ color: textColour }}
         >
           Hostel Facilities
         </motion.h2>
-        <div className="text-lg mb-6">
+        <div className="text-lg mb-6"
+         style={{ color: subTextColour }}>
           <p>Here are some images showcasing the facilities at our hostel, from rooms to recreational areas!</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -76,6 +82,9 @@ const Gallery = () => {
               <motion.div
                 className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center text-white font-semibold opacity-0 hover:opacity-100 transition-opacity duration-300"
                 whileHover={{ opacity: 1 }}
+                
+                style={{ color: textColour }}
+
               >
                 View Image
               </motion.div>
@@ -85,16 +94,22 @@ const Gallery = () => {
       </section>
 
       {/* Sports Section */}
-      <section className="w-full max-w-6xl px-4 mb-12">
+      <section className={`w-full max-w-6xl px-4 mb-12 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}
+        style={{ backgroundColor: bgColour }}>
         <motion.h2
-          className="text-3xl font-semibold mb-4"
+          className={`text-3xl font-semibold mb-4 ${theme === 'light' ? 'text-gray-900' : 'text-white'}`}
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
+          style={{ color: textColour }}
+
         >
           Sports Events
         </motion.h2>
-        <div className="text-lg mb-6">
+        <div className="text-lg mb-6" 
+                  style={{ color: subTextColour, backgroundColor: bgColour }}
+
+        >
           <p>Explore the exciting sports events and activities at our hostel!</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -114,6 +129,8 @@ const Gallery = () => {
               <motion.div
                 className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center text-white font-semibold opacity-0 hover:opacity-100 transition-opacity duration-300"
                 whileHover={{ opacity: 1 }}
+                style={{ color: textColour }}
+
               >
                 View Image
               </motion.div>
@@ -123,16 +140,21 @@ const Gallery = () => {
       </section>
 
       {/* Events Section */}
-      <section className="w-full max-w-6xl px-4 mb-12">
+      <section className={`w-full max-w-6xl px-4 mb-12 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}
+        style={{ backgroundColor: bgColour }}>
         <motion.h2
-          className="text-3xl font-semibold mb-4"
+          className={`text-3xl font-semibold mb-4 ${theme === 'light' ? 'text-gray-900' : 'text-white'}`}
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
+          style={{ color: textColour }}
+
         >
           Hostel Events
         </motion.h2>
-        <div className="text-lg mb-6">
+        <div className="text-lg mb-6"
+                  style={{ color: subTextColour , backgroundColor: bgColour }}
+>
           <p>Check out the pictures from festivals and events celebrated at our hostel!</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -152,6 +174,8 @@ const Gallery = () => {
               <motion.div
                 className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center text-white font-semibold opacity-0 hover:opacity-100 transition-opacity duration-300"
                 whileHover={{ opacity: 1 }}
+                style={{ color: textColour }}
+
               >
                 View Image
               </motion.div>

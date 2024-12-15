@@ -11,7 +11,7 @@
     --secondary-light: #F7FAFC;
   
     /* Dark Mode Colors */
-    --bg-dark: #282828;
+    --bg-dark: #121313;
     --text-dark: #CCCCCC;
     --text-dark-secondary: #999999;
     --primary-dark: #90CDF4;
@@ -28,6 +28,17 @@
   body.dark-mode {
     background-color: var(--bg-dark);
     color: var(--text-dark);
+  }
+  :root {
+    --primary-color: #4C51BF;
+  }
+  
+  .text-primary {
+    color: var(--primary-color);
+  }
+  
+  .bg-primary {
+    background-color: var(--primary-color);
   }
   
 

@@ -68,7 +68,7 @@ const DetailsPage = () => {
       className={`min-h-screen py-12 px-6 md:px-20 pt-32 ${
         theme === "light"
           ? "bg-gray-100 text-gray-800"
-          : "bg-gray-900 text-gray-300"
+          : "bg-[--bg-dark] text-gray-300"
       }`}
     >
       {/* Header Section */}
@@ -226,7 +226,7 @@ const DetailsPage = () => {
           <div
             key={index}
             className={`group relative p-6 rounded-lg shadow-md border overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:scale-105 ${
-              theme === "light" ? "bg-white" : "bg-gray-800"
+              theme === "light" ? "bg-white" : "bg-[#222222]"
             }`}
           >
             <div className="overflow-hidden rounded-lg">

@@ -1,13 +1,20 @@
 import React, { useRef, useEffect, useContext } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import principleImage from "../assets/principle.jpg"; 
+import principleImage from "../assets/principle.jpg";
 import { ThemeContext } from "../ThemeContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const HostelSection = () => {
-  const { theme } = useContext(ThemeContext);
+  const {
+    theme,
+    subTextColour,
+    containerColour,
+    textColour,
+    bgColour,
+  } = useContext(ThemeContext);
+
   const imageRef = useRef(null);
   const textRefs = useRef([]);
 
@@ -67,6 +74,10 @@ const HostelSection = () => {
       className={`p-6 md:p-10 flex justify-center items-center shadow-lg w-full mx-auto ${
         theme === 'light' ? 'bg-[var(--bg-light)] text-[var(--text-light)]' : 'bg-[var(--bg-dark)] text-[var(--text-dark)]'
       }`}
+      style={{
+        backgroundColor: bgColour ,
+      
+      }}
     >
       <div className="flex flex-col md:flex-row items-center md:items-start md:gap-28">
         {/* Image Section */}
@@ -84,6 +95,10 @@ const HostelSection = () => {
             className={`text-2xl md:text-3xl font-bold ${
               theme === 'light' ? 'text-[var(--text-light)]' : 'text-[var(--text-dark)]'
             }`}
+            style={{
+              color: textColour ,
+            
+            }}
           >
             Message from the Principal
           </h2>
@@ -92,6 +107,10 @@ const HostelSection = () => {
             className={`${
               theme === 'light' ? 'text-[var(--text-light-secondary)]' : 'text-[var(--text-dark-secondary)]'
             }`}
+            style={{
+              color: subTextColour ,
+            
+            }}
           >
             Dear Students, welcome to our college hostel—a home away from home.
             Here, you will find a safe, comfortable, and inclusive environment
@@ -102,6 +121,10 @@ const HostelSection = () => {
             className={`${
               theme === 'light' ? 'text-[var(--text-light-secondary)]' : 'text-[var(--text-dark-secondary)]'
             }`}
+            style={{
+              color: subTextColour ,
+            
+            }}
           >
             Make the most of your time here, respect each other, and embrace
             opportunities for learning and building friendships. Together, we
@@ -109,10 +132,18 @@ const HostelSection = () => {
           </p>
           <div
             ref={addTextRef}
-            className={`mt-6 ${theme === 'light' ? 'text-[var(--text-light)]' : 'text-[var(--text-dark)]'}`}
+            className={`mt-6 ${
+              theme === 'light' ? 'text-[var(--text-light)]' : 'text-[var(--text-dark)]'
+            }`}
           >
-            <p className="font-bold">Best regards, Pranav Kumar,</p>
-            <p className="font-bold">Government Engineering College Arwal</p>
+            <p className="font-bold"   style={{
+              color: subTextColour ,
+            
+            }}>Best regards, Pranav Kumar,</p>
+            <p className="font-bold"   style={{
+              color: subTextColour ,
+            
+            }}>Government Engineering College Arwal</p>
           </div>
         </div>
       </div>

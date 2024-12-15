@@ -43,7 +43,7 @@ const Facilities = () => {
 
   return (
     <div
-      className={`min-h-screen py-12 px-6 md:px-20 ${theme === 'light' ? 'bg-gray-100 text-gray-800' : 'bg-gray-900 text-gray-300'}`}
+      className={`min-h-screen py-12 px-6 md:px-20 ${theme === 'light' ? 'bg-gray-100 text-gray-800' : 'bg-[--bg-dark] text-gray-300'}`}
       style={{ userSelect: 'none' }} // Prevent text selection
     >
       <div className="text-center mb-10">

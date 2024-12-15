@@ -7,7 +7,7 @@ import dp from "../assets/dp.jpeg"; // Import the image
 import { ThemeContext } from '../ThemeContext';
 
 const TestimonialsSection = () => {
-  const { theme } = useContext(ThemeContext);
+  const { theme, bgColour, containerColour, textColour, subTextColour } = useContext(ThemeContext);
 
   const testimonials = [
     {
@@ -69,43 +69,78 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <div className={`w-full mx-auto pb-12 pt-1 px-6 sm:px-12 md:px-24 lg:px-52 shadow-lg ${theme === 'light' ? 'bg-gray-100 text-gray-800' : 'bg-gray-800 text-gray-200'}`}>
-      <h2 className="text-3xl font-bold mb-6 text-center">
+    <div
+      className={`w-full mx-auto pb-12 pt-1 px-6 sm:px-12 md:px-24 lg:px-52 shadow-lg`}
+      style={{
+        backgroundColor: bgColour, // Apply background color from context
+      }}
+    >
+      <h2
+        className="text-3xl font-bold mb-6 text-center"
+        style={{
+          color: textColour, // Apply heading text color dynamically
+        }}
+      >
         What Our Hostel Residents Say
       </h2>
-      <Slider {...settings}>
-        {testimonials.map((testimonial, index) => (
-          <div key={index} className="relative">
-            <div className={`p-6 rounded-lg shadow-md text-center ${theme === 'light' ? 'bg-white text-gray-800' : 'bg-gray-700 text-gray-300'}`}>
-              <img
-                src={testimonial.image} // Use the imported dp.jpeg here
-                alt={testimonial.name}
-                className="mx-auto rounded-full w-24 h-24 sm:w-32 sm:h-32 object-cover mb-4"
-              />
-              <p className="italic text-lg mb-4">
-                "{testimonial.text}"
-              </p>
-               {/* Star Rating */}
-               <div className="flex justify-center mt-3 mb-3">
-                {Array.from({ length: 5 }, (_, i) => (
-                  <FaStar
-                    key={i}
-                    color={i < testimonial.rating ? "#FFD700" : "#D3D3D3"} // Gold for active stars, gray for inactive
-                    size={20}
-                  />
-                ))}
+      <div
+        className={`w-full ${containerColour} mx-auto`} // Apply container background color dynamically
+      >
+        <Slider {...settings}>
+          {testimonials.map((testimonial, index) => (
+            <div key={index} className="relative">
+              <div
+                className={`p-6 rounded-lg shadow-md text-center ${theme === 'light' ? 'bg-white text-gray-800' : 'bg-gray-700 text-gray-300'}`
+                  
+                }
+                style={{
+                  backgroundColor: containerColour, // Apply heading text color dynamically
+                }}
+              >
+                <img
+                  src={testimonial.image} // Use the imported dp.jpeg here
+                  alt={testimonial.name}
+                  className="mx-auto rounded-full w-24 h-24 sm:w-32 sm:h-32 object-cover mb-4"
+                />
+                <p
+                  className="italic text-lg mb-4"
+                  style={{
+                    color: subTextColour, // Apply subheading text color dynamically
+                  }}
+                >
+                  "{testimonial.text}"
+                </p>
+                {/* Star Rating */}
+                <div className="flex justify-center mt-3 mb-3">
+                  {Array.from({ length: 5 }, (_, i) => (
+                    <FaStar
+                      key={i}
+                      color={i < testimonial.rating ? "#FFD700" : "#D3D3D3"} // Gold for active stars, gray for inactive
+                      size={20}
+                    />
+                  ))}
+                </div>
+                <h4
+                  className="text-xl font-semibold"
+                  style={{
+                    color: textColour, // Apply name text color dynamically
+                  }}
+                >
+                  - {testimonial.name}
+                </h4>
+                <p
+                  className="text-sm"
+                  style={{
+                    color: subTextColour, // Apply subheading text color dynamically
+                  }}
+                >
+                  {testimonial.title}
+                </p>
               </div>
-              <h4 className="text-xl font-semibold">
-                - {testimonial.name}
-              </h4>
-              <p className="text-sm">{testimonial.title}</p>
-
-             
             </div>
-          </div>
-        ))}
-      </Slider>
-
+          ))}
+        </Slider>
+      </div>
 
       <style jsx>{`
         .slick-dots {
