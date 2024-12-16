@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { FaStar } from "react-icons/fa"; // Import FaStar from react-icons
 import dp from "../assets/dp.jpeg"; // Import the image
 import { ThemeContext } from '../ThemeContext';
+import rahulimage from "../assets/Rahul.jpeg"
 
 const TestimonialsSection = () => {
   const { theme, bgColour, containerColour, textColour, subTextColour } = useContext(ThemeContext);
@@ -14,7 +15,7 @@ const TestimonialsSection = () => {
       name: "Rahul Kumar",
       title: "B.Tech 3rd Semester",
       text: "The hostel provides a peaceful and well-maintained environment. The staff is supportive, and the facilities are great for studying and relaxing.",
-      image: dp, // Use the imported dp image here
+      image: rahulimage, // Use the imported dp image here
       rating: 5, // 5 stars rating
     },
     {

@@ -3,9 +3,19 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ThemeContext } from "../ThemeContext";
 
-import facilityImage1 from "../assets/first1.jpg";
-import facilityImage2 from "../assets/second.jpg";
-import facilityImage3 from "../assets/third.jpg";
+// import facilityImage1 from "../assets/first1.jpg";
+// import facilityImage2 from "../assets/second.jpg";
+// import facilityImage3 from "../assets/third.jpg";
+import room from '../assets/room.jpg';
+import mess from '../assets/mess.jpg';
+
+
+import facilityImage1 from "../assets/banner1.jpg";
+import facilityImage2 from "../assets/newhostel4.jpg";
+import facilityImage3 from "../assets/hostel3.jpeg";
+import banner5 from "../assets/banner5.jpg";
+import banner3 from "../assets/banner3.jpg";
+import washingmachineImage from "../assets/hostelimage/washingmachine.jpg"
 
 const DetailsPage = () => {
   const { theme } = useContext(ThemeContext);
@@ -102,7 +112,7 @@ const DetailsPage = () => {
             number: 160,
             title: "Rooms",
             description: "160 spacious and well-furnished rooms with modern amenities.",
-            image: facilityImage2,
+            image: room,
           },
           {
             number: 30,
@@ -126,7 +136,7 @@ const DetailsPage = () => {
             number: 7,
             title: "Washing Machines",
             description: "7 washing machines for convenient laundry.",
-            image: facilityImage3,
+            image: washingmachineImage,
           },
         ].map((facility, index) => (
           <div
